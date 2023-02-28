@@ -14,6 +14,8 @@ void print_map(char *map, int width, int height){
 }
 
 int main(){
+    char *map = "#####  ##. #####";
 
+    print_map(map, 4, 4);
     return 0;
 }

@@ -15,4 +15,32 @@
  */
 void print_map(char *map, int width, int height);
 
+
+/**
+ * @brief The structure representing the player position
+ * 
+ */
+struct coord {
+    /** the ordinate of the point (height on the map)*/
+    int coord_height;
+
+    /** the abscissa of the point (width on the map)*/
+    int coord_width;
+};
+
+
+/**
+ * @brief The structure representing the game map
+ * 
+ */
+struct game_map {
+    /** The height of the map */
+    int height;
+    int width;
+
+    struct coord player_pos;
+
+    char *map; 
+};
+
 #endif
