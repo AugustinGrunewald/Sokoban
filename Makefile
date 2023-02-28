@@ -46,6 +46,7 @@ test-move: test-move.o
 test-replay: test-replay.o
 	$(CC) $(CFLAGS) -o test-replay test-replay.o
 
+
 example-main: example-main.o
 	$(CC) $(CFLAGS) -o example-main example-main.o
 
@@ -76,7 +77,7 @@ app-ex-gui: app-ex-gui.o gui.o
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
 	write-fact test-dummy app-ex-loader app-ex-gui sokoban \
-	test-loader test-move test-replay
+	loader test-loader test-move test-replay
 
 # add all your test executables in the following variable. You should respect
 # the order given in the project text

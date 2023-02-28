@@ -17,7 +17,7 @@ void print_map(char *map, int width, int height);
 
 
 /**
- * @brief The structure representing the player position
+ * @brief The structure representing the position of the player
  * 
  */
 struct coord {
@@ -34,12 +34,15 @@ struct coord {
  * 
  */
 struct game_map {
-    /** The height of the map */
+    /** The height of the map*/
     int height;
+    /** The width of the map*/
     int width;
 
+    /** The position of the player*/
     struct coord player_pos;
 
+    /** The map*/
     char *map; 
 };
 
