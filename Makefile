@@ -27,9 +27,25 @@ clean:
 # this rule (see examples)
 # \ allows to go on the next line
 check-syntax: example-main.o read-file-formatted.o read-file-text.o \
-	write-fact.o test-dummy.o disc.o snow.o
+	write-fact.o test-dummy.o sokoban.o loader.o test-loader.o \
+	test-move.o test-replay.o 
 
 # put all the rules to build your applications and tests here (see examples)
+sokoban: sokoban.o
+	$(CC) $(CFLAGS) -o sokoban sokoban.o
+
+loader: loader.o
+	$(CC) $(CFLAGS) -o loader loader.o
+
+test-loader: test-loader.o
+	$(CC) $(CFLAGS) -o test-loader test-loader.o
+
+test-move: test-move.o
+	$(CC) $(CFLAGS) -o test-move test-move.o
+
+test-replay: test-replay.o
+	$(CC) $(CFLAGS) -o test-replay test-replay.o
+
 example-main: example-main.o
 	$(CC) $(CFLAGS) -o example-main example-main.o
 
@@ -59,7 +75,8 @@ app-ex-gui: app-ex-gui.o gui.o
 # put all your applications and tests executables as prerequisite of this rule
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
-	write-fact test-dummy app-ex-loader app-ex-gui
+	write-fact test-dummy app-ex-loader app-ex-gui sokoban \
+	test-loader test-move test-replay
 
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
