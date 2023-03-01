@@ -57,3 +57,7 @@ struct game_map *map_loader(const char *adress) {
 
     return loaded_map;
 }
+
+int main() {
+    return 0;
+}

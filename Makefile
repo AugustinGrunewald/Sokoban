@@ -37,7 +37,7 @@ sokoban: sokoban.o
 loader: loader.o
 	$(CC) $(CFLAGS) -o loader loader.o
 
-test-loader: test-loader.o
+test-loader: test-loader.o loader.o sokoban.o sokoban.h loader.h
 	$(CC) $(CFLAGS) -o test-loader test-loader.o
 
 test-move: test-move.o
@@ -81,7 +81,7 @@ compile-all: example-main read-file-formatted read-file-text \
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
 # \ allows to go to the next line
-ALL_TESTS = test-loader test-dummy
+ALL_TESTS = test-loader 
 
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done

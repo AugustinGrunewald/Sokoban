@@ -48,13 +48,17 @@ void print_map(struct game_map used_map){
     }
 }
 
-int main(){
-    struct game_map example_map;
-
-    example_map.map = "#####  ##. #####";
-    example_map.height = 4;
-    example_map.width = 4;
-
-    print_map(example_map);
+int main() {
     return 0;
 }
+
+// int main(){
+//     struct game_map example_map;
+
+//     example_map.map = "#####  ##. #####";
+//     example_map.height = 4;
+//     example_map.width = 4;
+
+//     print_map(example_map);
+//     return 0;
+// }
