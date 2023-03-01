@@ -6,24 +6,18 @@
 #include "sokoban.h"
 
 
-struct game_map *map_loader(int argc, char *argv[]) {
+struct game_map *map_loader(const char *adress) {
     // initializing of the dynamically allocated structure representing the map
     struct game_map *loaded_map = (struct game_map *) malloc(sizeof(struct game_map));
     
-    // testing if a filename has been given
-    if (argc != 2) {
-        fprintf(stderr, "You must provide a file name!\n");
-        exit(EXIT_FAILURE);
-    }
-
     // open file. The filename is the first argument on the command
     // line, hence stored in argv[1]
     FILE *p_file = NULL;
 
-    p_file = fopen(argv[1], "r");
+    p_file = fopen(adress, "r");
 
     if (p_file == NULL) {
-        fprintf(stderr, "Cannot read file %s!\n", argv[1]);
+        fprintf(stderr, "Cannot read file %s!\n", adress);
         exit(EXIT_FAILURE);
     }
 

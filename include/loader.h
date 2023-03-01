@@ -4,12 +4,10 @@
 /**
  * @brief This function defines the map loader
  * 
- * @param argc 
+ * @param adress the adress of the file that need to be open
  * 
- * @param argv the name of the file that need to be open
- * 
- * @return struct game_map* return the dynamically allocated structure representing the map 
+ * @return struct game_map* return the dynamically allocated structure representing the map
  */
-struct game_map *map_loader(int argc, char *argv[]);
+struct game_map *map_loader(const char *adress);
 
 #endif
