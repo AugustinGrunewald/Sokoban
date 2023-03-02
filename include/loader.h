@@ -11,6 +11,6 @@
 struct game_map *map_loader(const char *adress);
 
 
-void test_loader(const char *adress);
+void testing_loader(const char *adress);
 
 #endif

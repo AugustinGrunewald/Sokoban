@@ -75,13 +75,13 @@ app-ex-gui: app-ex-gui.o gui.o
 # put all your applications and tests executables as prerequisite of this rule
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
-	write-fact test-dummy app-ex-loader app-ex-gui \
-	test-loader test-move test-replay
-
+	write-fact test-dummy app-ex-loader app-ex-gui test-loader test-move test-replay \
+	#sokoban loader
+	 
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
 # \ allows to go to the next line
-ALL_TESTS = test-loader 
+ALL_TESTS = test-dummy test-loader 
 
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done
@@ -90,4 +90,3 @@ launch-tests: $(ALL_TESTS)
 svn-add-all-files:
 	svn add --force src/*.c include/*.h data/*.txt --auto-props --parents --depth infinity -q
 
-#sokoban loader
