@@ -1,8 +1,11 @@
 #ifndef SOKOBAN_H
 #define SOKOBAN_H
 
+#include <stdbool.h>
+
 typedef struct game_map game_map;
 typedef struct couple couple;
+typedef struct move_tool move_tool;
 
 
 /**
@@ -34,6 +37,15 @@ struct game_map {
 };
 
 
+struct move_tool {
+    /** A boolean showing if the movement is possible*/
+    bool movement_possible;
+
+    /** A map*/
+    char *map;
+}
+
+
 /**
  * @brief Print the map in the console.
  * 
@@ -41,5 +53,38 @@ struct game_map {
  */
 void print_map(game_map used_map);
 
+
+/**
+ * @brief Moving the player on the map.
+ * 
+ * @param p_initial_map A pointer to the structure representing the map.
+ * 
+ * @param direction The direction of the wanted movement (N, S, E, W). 
+ * 
+ * @return game_map* 
+ */
+game_map *move(game_map *p_initial_map, char direction);
+
+
+/**
+ * @brief Testing if a movement is possible.
+ * 
+ * @param p_initial_map A pointer to the structure representing the map. 
+ * 
+ * @param direction The direction of the wanted movement (N, S, E, W).
+ * 
+ * @return move_tool
+ */
+move_tool valid_movement(game_map *p_initial_map, char direction);
+
+
+/**
+ * @brief Tool to associate a height and a width to the given direction  
+ * 
+ * @param direction_associated_int direction (N-0, S-1, E-2, W-3)
+ * 
+ * @return couple 
+ */
+couple tool_direction(int direction_associated_int);
 
 #endif
