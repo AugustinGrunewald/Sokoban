@@ -9,8 +9,6 @@
 game_map *map_loader(const char *adress) {
     // initializing of the dynamically allocated structure representing the map  
     game_map *p_loaded_map = (game_map *) malloc(sizeof(game_map));
-    // initializing of the first part of the dynamically allocated structure representing the map  
-    //couple *map_size = (couple *) malloc(sizeof(couple));
 
     // open file. The filename is the first argument on the command
     // line, hence stored in argv[1]
@@ -38,7 +36,6 @@ game_map *map_loader(const char *adress) {
     p_loaded_map->map_size.height = height;
     p_loaded_map->map_size.width = width;
     
-    // reading of the rest of the map, and research of the player position
 
     // initializing of a pointer to a copy of the character of the map
     char *p_char_memory = (char *) malloc(height*width*sizeof(char)); 
