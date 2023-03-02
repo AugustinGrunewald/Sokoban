@@ -6,10 +6,12 @@
 #include "sokoban.h"
 
 
-struct game_map *map_loader(const char *adress) {
-    // initializing of the dynamically allocated structure representing the map
-    struct game_map *loaded_map = (struct game_map *) malloc(sizeof(struct game_map));
-    
+game_map *map_loader(const char *adress) {
+    // initializing of the dynamically allocated structure representing the map  
+    game_map *p_loaded_map = (game_map *) malloc(sizeof(game_map));
+    // initializing of the first part of the dynamically allocated structure representing the map  
+    //couple *map_size = (couple *) malloc(sizeof(couple));
+
     // open file. The filename is the first argument on the command
     // line, hence stored in argv[1]
     FILE *p_file = NULL;
@@ -33,27 +35,40 @@ struct game_map *map_loader(const char *adress) {
         exit(EXIT_FAILURE);
     }
 
-    loaded_map->height = height;
-    loaded_map->width = width;
+    p_loaded_map->map_size.height = height;
+    p_loaded_map->map_size.width = width;
+    
+    // reading of the rest of the map, and research of the player position
 
+    // initializing of a pointer to a copy of the character of the map
+    char *p_char_memory = (char *) malloc(height*width*sizeof(char)); 
+    int marker = 0;
+    char player[] = {'@'};
 
-    char char_memory[height * width + 2]; 
     // read following lines
     // line_buffer contains a line and is a correct string
     // width + 2 is needed to get the carriage return symbol
     char line_buffer[width + 2];
 
-    for (int i = 0; i < height; i++) {
+    for (int ind_line = 0; ind_line < height; ind_line++) {
         fgets(line_buffer, width + 2, p_file);
 
-        for (int j = 0; j < width; j++) {
-            char_memory[i * width + j] = line_buffer[j];
+        for (int ind_row = 0; ind_row < width; ind_row++) {
+            p_char_memory[ind_line * width + ind_row] = line_buffer[ind_row];
+            
+            if (marker == 0) {
+                if (p_char_memory[ind_line * width + ind_row] == player[0]){
+                    marker = 1;
+                    p_loaded_map->player_pos.width = ind_row + 1;
+                    p_loaded_map->player_pos.height = ind_line + 1;
+                }
+            }
         }
     }
 
-    loaded_map->map = char_memory;
+    p_loaded_map->map = p_char_memory;
 
     fclose(p_file);
 
-    return loaded_map;
+    return p_loaded_map;
 }

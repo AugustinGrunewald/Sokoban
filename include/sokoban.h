@@ -1,16 +1,20 @@
 #ifndef SOKOBAN_H
 #define SOKOBAN_H
 
+typedef struct game_map game_map;
+typedef struct couple couple;
+
+
 /**
  * @brief The structure representing the position of the player
  * 
  */
-struct coord {
-    /** the ordinate of the point (height on the map)*/
-    int coord_height;
+struct couple {
+    /** an int representing the height*/
+    int height;
 
-    /** the abscissa of the point (width on the map)*/
-    int coord_width;
+    /** an int representing the width*/
+    int width;
 };
 
 
@@ -19,13 +23,11 @@ struct coord {
  * 
  */
 struct game_map {
-    /** The height of the map*/
-    int height;
-    /** The width of the map*/
-    int width;
+    /** The size of the map*/
+    couple map_size;
 
     /** The position of the player*/
-    struct coord player_pos;
+    couple player_pos;
 
     /** The map*/
     char *map; 
@@ -37,7 +39,7 @@ struct game_map {
  * 
  * @param used_map The structure representing the map.
  */
-void print_map(struct game_map used_map);
+void print_map(game_map used_map);
 
 
 #endif
