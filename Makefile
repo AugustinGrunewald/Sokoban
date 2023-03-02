@@ -81,7 +81,7 @@ compile-all: example-main read-file-formatted read-file-text \
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
 # \ allows to go to the next line
-ALL_TESTS = test-dummy test-loader 
+ALL_TESTS = test-loader 
 
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done

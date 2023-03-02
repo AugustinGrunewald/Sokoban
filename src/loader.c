@@ -41,6 +41,7 @@ game_map *map_loader(const char *adress) {
     char *p_char_memory = (char *) malloc(height*width*sizeof(char)); 
     int marker = 0;
     char player[] = {'@'};
+    char player_bis[] = {'+'};
 
     // read following lines
     // line_buffer contains a line and is a correct string
@@ -54,7 +55,7 @@ game_map *map_loader(const char *adress) {
             p_char_memory[ind_line * width + ind_row] = line_buffer[ind_row];
             
             if (marker == 0) {
-                if (p_char_memory[ind_line * width + ind_row] == player[0]){
+                if (p_char_memory[ind_line * width + ind_row] == player[0] || p_char_memory[ind_line * width + ind_row] == player_bis[0]){
                     marker = 1;
                     p_loaded_map->player_pos.width = ind_row + 1;
                     p_loaded_map->player_pos.height = ind_line + 1;
