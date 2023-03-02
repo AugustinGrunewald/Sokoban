@@ -31,14 +31,14 @@ check-syntax: example-main.o read-file-formatted.o read-file-text.o \
 	test-move.o test-replay.o 
 
 # put all the rules to build your applications and tests here (see examples)
-sokoban: sokoban.o
-	$(CC) $(CFLAGS) -o sokoban sokoban.o
+test-loader: test-loader.o loader.o sokoban.o
+	$(CC) $(CFLAGS) -o test-loader test-loader.o loader.o sokoban.o
 
-loader: loader.o
-	$(CC) $(CFLAGS) -o loader loader.o
+# sokoban: sokoban.o
+# 	$(CC) $(CFLAGS) -o sokoban sokoban.o
 
-test-loader: test-loader.o loader.o sokoban.o sokoban.h loader.h
-	$(CC) $(CFLAGS) -o test-loader test-loader.o
+# loader: loader.o
+# 	$(CC) $(CFLAGS) -o loader loader.o
 
 test-move: test-move.o
 	$(CC) $(CFLAGS) -o test-move test-move.o
@@ -75,8 +75,8 @@ app-ex-gui: app-ex-gui.o gui.o
 # put all your applications and tests executables as prerequisite of this rule
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
-	write-fact test-dummy app-ex-loader app-ex-gui sokoban \
-	loader test-loader test-move test-replay
+	write-fact test-dummy app-ex-loader app-ex-gui \
+	test-loader test-move test-replay
 
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
@@ -89,3 +89,5 @@ launch-tests: $(ALL_TESTS)
 # add all .c, .h and .txt files in repository
 svn-add-all-files:
 	svn add --force src/*.c include/*.h data/*.txt --auto-props --parents --depth infinity -q
+
+#sokoban loader

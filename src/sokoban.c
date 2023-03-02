@@ -48,9 +48,9 @@ void print_map(struct game_map used_map){
     }
 }
 
-int main() {
-    return 0;
-}
+// int main() {
+//     return 0;
+// }
 
 // int main(){
 //     struct game_map example_map;
