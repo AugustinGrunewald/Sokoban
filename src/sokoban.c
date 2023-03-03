@@ -227,3 +227,24 @@ double_couple tool_direction(int direction_associated_int){
     }
 }
 
+bool comparaison_two_maps(game_map first_map, game_map second_map){
+    bool result = true;
+
+    if (first_map.map_size.width != second_map.map_size.width || first_map.map_size.height != second_map.map_size.height){
+        result = false;
+        return result;
+    }
+    else {
+        int length_map = first_map.map_size.height * first_map.map_size.width;
+        char *first_map_string = first_map.map;
+        char *second_map_string = second_map.map;
+    
+        for (int i = 0; i < length_map; i++) {
+            if (first_map_string[i] != second_map_string[i]){
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+}

@@ -88,12 +88,25 @@ move_tool *valid_movement(game_map *p_initial_map, char direction);
 
 
 /**
- * @brief Tool to associate a height and a width to the given direction  
+ * @brief Tool to associate a height and a width to the given direction.  
  * 
- * @param direction_associated_int direction (N-0, S-1, E-2, W-3)
+ * @param direction_associated_int direction (N-0, S-1, E-2, W-3).
  * 
  * @return double_couple 
  */
 double_couple tool_direction(int direction_associated_int);
 
+
+/**
+ * @brief Testing if two maps are the same.
+ * 
+ * @param first_map The first map.
+ * 
+ * @param second_map The second map.
+ *  
+ * @return true 
+ * @return false 
+ */
+bool comparaison_two_maps(game_map first_map, game_map second_map);
+    
 #endif
