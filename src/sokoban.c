@@ -49,26 +49,26 @@ game_map *move(game_map *p_initial_map, char direction){
             if (direction == available_direction[i]) {
                 //changing the player position
                 p_new_map->player_pos.height = p_initial_map->player_pos.height + tool_direction(i).first_level.height;
-                p_new_map->player_pos.width = p_initial_map->player_pos.width + tool_direction(i).first_level.width;
-
-                //should change the map into the new one : player position (+ can became @), boxes should be moved
-                
+                p_new_map->player_pos.width = p_initial_map->player_pos.width + tool_direction(i).first_level.width;                
             } 
         }
 
         p_new_map->map = valid_movement(p_initial_map, direction)->map;
 
         return p_new_map;
-        //free(p_initial_map); à voir si ça marche
+
+        // free(p_initial_map->map);
+        // free(p_initial_map);             not working
+        // free(p_new_map);
+        // free(p_initial_map); 
     }
+    // free(p_initial_map);
 }
 
 move_tool *valid_movement(game_map *p_initial_map, char direction){
     //creating a string that will contain the new version of the map
     char *p_new_map = (char *) malloc(p_initial_map->map_size.height*p_initial_map->map_size.width*sizeof(char)); 
     
-    int youpi = 1000;
-
     //adding usefull structure for testing
     char available_direction[] = "NSEW";
     char available_elements[] = "@+$*. #";
@@ -100,8 +100,6 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
 
         if (p_initial_map->map[player_position_indice] == available_elements[1]){
             p_new_map[player_position_indice] = available_elements[4];
-            printf("%d\n", youpi);
-
         } else {
             p_new_map[player_position_indice] = available_elements[5];
         }
@@ -185,6 +183,10 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
     else{
         return result;
     }
+
+    // free(p_new_map);
+    // free(result);           not working
+    // free(p_initial_map);
 }
 
 double_couple tool_direction(int direction_associated_int){
