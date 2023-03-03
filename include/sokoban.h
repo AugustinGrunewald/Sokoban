@@ -5,6 +5,7 @@
 
 typedef struct game_map game_map;
 typedef struct couple couple;
+typedef struct double_couple double_couple;
 typedef struct move_tool move_tool;
 
 
@@ -20,6 +21,14 @@ struct couple {
     int width;
 };
 
+
+struct double_couple {
+    /** a couple representing the first available movement*/
+    couple first_level;
+
+    /** a couple representing the second available movement*/
+    couple second_level;
+};
 
 /**
  * @brief The structure representing the game map
@@ -43,7 +52,7 @@ struct move_tool {
 
     /** A map*/
     char *map;
-}
+};
 
 
 /**
@@ -75,7 +84,7 @@ game_map *move(game_map *p_initial_map, char direction);
  * 
  * @return move_tool
  */
-move_tool valid_movement(game_map *p_initial_map, char direction);
+move_tool *valid_movement(game_map *p_initial_map, char direction);
 
 
 /**
@@ -83,8 +92,8 @@ move_tool valid_movement(game_map *p_initial_map, char direction);
  * 
  * @param direction_associated_int direction (N-0, S-1, E-2, W-3)
  * 
- * @return couple 
+ * @return double_couple 
  */
-couple tool_direction(int direction_associated_int);
+double_couple tool_direction(int direction_associated_int);
 
 #endif
