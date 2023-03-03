@@ -34,6 +34,7 @@ void print_map(game_map used_map){
 game_map *move(game_map *p_initial_map, char direction){
     // testing the faisability of the movement
     if (valid_movement(p_initial_map, direction)->movement_possible == false) {
+        // printf("%d \n", valid_movement(p_initial_map, direction)->movement_possible);
         return p_initial_map;
     } 
     
@@ -47,8 +48,8 @@ game_map *move(game_map *p_initial_map, char direction){
         for (int i = 0; i < 4; i++){
             if (direction == available_direction[i]) {
                 //changing the player position
-                p_new_map->player_pos.height += tool_direction(i).first_level.height;
-                p_new_map->player_pos.width += tool_direction(i).first_level.width;
+                p_new_map->player_pos.height = p_initial_map->player_pos.height + tool_direction(i).first_level.height;
+                p_new_map->player_pos.width = p_initial_map->player_pos.width + tool_direction(i).first_level.width;
 
                 //should change the map into the new one : player position (+ can became @), boxes should be moved
                 
@@ -66,6 +67,8 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
     //creating a string that will contain the new version of the map
     char *p_new_map = (char *) malloc(p_initial_map->map_size.height*p_initial_map->map_size.width*sizeof(char)); 
     
+    int youpi = 1000;
+
     //adding usefull structure for testing
     char available_direction[] = "NSEW";
     char available_elements[] = "@+$*. #";
@@ -79,14 +82,15 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
         }
     }
 
-    int pointed_element_indice = (p_initial_map->player_pos.height + tool_direction_associated.first_level.height) * p_initial_map->map_size.width + (p_initial_map->player_pos.width + tool_direction_associated.first_level.width);
-    int pointed_element_indice_further = (p_initial_map->player_pos.height + tool_direction_associated.second_level.height) * p_initial_map->map_size.width + (p_initial_map->player_pos.width + tool_direction_associated.second_level.width);
-    int player_position_indice = p_initial_map->player_pos.height * p_initial_map->map_size.width + p_initial_map->player_pos.width;
+    int pointed_element_indice = (p_initial_map->player_pos.height + tool_direction_associated.first_level.height - 1) * p_initial_map->map_size.width + (p_initial_map->player_pos.width + tool_direction_associated.first_level.width - 1);
+    int pointed_element_indice_further = (p_initial_map->player_pos.height + tool_direction_associated.second_level.height - 1) * p_initial_map->map_size.width + (p_initial_map->player_pos.width + tool_direction_associated.second_level.width - 1);
+    int player_position_indice = (p_initial_map->player_pos.height - 1)* p_initial_map->map_size.width + p_initial_map->player_pos.width - 1;
 
     //checking if there is an empty space or a storage destination without a box and moving to it
     if (p_initial_map->map[pointed_element_indice] == available_elements[5] || p_initial_map->map[pointed_element_indice] == available_elements[4]){
         result->movement_possible = true;
         
+
         //modify the beginning map 
         for (int i = 0; i < p_initial_map->map_size.height * p_initial_map->map_size.width; i++){
             if (i != player_position_indice || i != pointed_element_indice){
@@ -96,6 +100,8 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
 
         if (p_initial_map->map[player_position_indice] == available_elements[1]){
             p_new_map[player_position_indice] = available_elements[4];
+            printf("%d\n", youpi);
+
         } else {
             p_new_map[player_position_indice] = available_elements[5];
         }
@@ -103,7 +109,7 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
         if (p_initial_map->map[pointed_element_indice] == available_elements[4]){
             p_new_map[pointed_element_indice] = available_elements[1];
         } else {
-            p_new_map[player_position_indice] = available_elements[0];
+            p_new_map[pointed_element_indice] = available_elements[0];
         }
 
         result->map = p_new_map; 
@@ -142,7 +148,7 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
             if (p_initial_map->map[pointed_element_indice] == available_elements[3]){
                 p_new_map[pointed_element_indice] = available_elements[1];
             } else {
-                p_new_map[player_position_indice] = available_elements[0];
+                p_new_map[pointed_element_indice] = available_elements[0];
             }
 
             if (p_initial_map->map[pointed_element_indice_further] == available_elements[4]){
