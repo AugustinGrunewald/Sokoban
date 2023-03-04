@@ -33,8 +33,10 @@ void print_map(game_map used_map){
 
 game_map *move(game_map *p_initial_map, char direction){
     // testing the faisability of the movement
-    if (valid_movement(p_initial_map, direction)->movement_possible == false) {
-        // printf("%d \n", valid_movement(p_initial_map, direction)->movement_possible);
+
+    move_tool *valid_movement_result = valid_movement(p_initial_map, direction);
+
+    if (valid_movement_result->movement_possible == false) {
         return p_initial_map;
     } 
     
@@ -53,9 +55,10 @@ game_map *move(game_map *p_initial_map, char direction){
             } 
         }
 
-        p_new_map->map = valid_movement(p_initial_map, direction)->map;
+        p_new_map->map = valid_movement_result->map;
 
         return p_new_map;
+
 
         // free(p_initial_map->map);
         // free(p_initial_map);             not working
