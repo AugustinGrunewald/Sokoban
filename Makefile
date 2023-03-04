@@ -70,7 +70,6 @@ app-ex-gui: app-ex-gui.o gui.o
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
 	write-fact test-dummy app-ex-loader app-ex-gui test-loader test-move test-replay \
-	#sokoban loader
 	 
 # add all your test executables in the following variable. You should respect
 # the order given in the project text

@@ -31,6 +31,8 @@ void test_move(const char *adress_original_file, const char *adress_result_file)
     free(original_map);
     free(result_map->map);
     free(result_map);
+
+    free(result_map_with_move_function);
 }
 
 int main(void){

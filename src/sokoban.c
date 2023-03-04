@@ -58,14 +58,7 @@ game_map *move(game_map *p_initial_map, char direction){
         p_new_map->map = valid_movement_result->map;
 
         return p_new_map;
-
-
-        // free(p_initial_map->map);
-        // free(p_initial_map);             not working
-        // free(p_new_map);
-        // free(p_initial_map); 
     }
-    // free(p_initial_map);
 }
 
 move_tool *valid_movement(game_map *p_initial_map, char direction){
