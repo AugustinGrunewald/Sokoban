@@ -122,4 +122,18 @@ bool comparaison_two_maps(game_map first_map, game_map second_map);
  */
 bool comparaison_two_adresses(const char *adress_1, const char *adress_2);
 
+
+/**
+ * @brief Given movements actions, it should return the final map after executing all the movements.
+ * 
+ * @param loaded_map A pointer to the structure representing the initial map.
+ * 
+ * @param length_direction_string An int representing the number of movements you want to execute in the plan.
+ * 
+ * @param direction_string A string representing the plan.
+ *  
+ * @return game_map* 
+ */
+game_map *replay(game_map *loaded_map, int length_direction_string, char *direction_string);
+
 #endif

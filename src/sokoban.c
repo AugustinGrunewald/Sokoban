@@ -268,21 +268,45 @@ bool comparaison_two_adresses(const char *adress_1, const char *adress_2){
 }
 
 game_map *replay(game_map *loaded_map, int length_direction_string, char *direction_string){
-    //initialization of the loop
     game_map *current_step_map = loaded_map;
+    game_map *copy_map = (game_map *) malloc(sizeof(game_map));
 
     for(int direction_step = 0; direction_step < length_direction_string; direction_step++){
-
         char current_direction = direction_string[direction_step];
-        move_tool *valid_movement_result = valid_movement(current_step_map, current_direction);
 
         game_map *next_step_map = move(current_step_map, current_direction);
+        bool marker = comparaison_two_maps(*next_step_map, *current_step_map);
 
-
-        if (valid_movement_result->movement_possible == true){
-            free(next_step_map->map);
-            free(next_step_map);
+        //copying the value of the current_step_map in a dedicated allocated place
+        copy_map->map = next_step_map->map;
+        copy_map->map_size.height = next_step_map->map_size.height;
+        copy_map->map_size.width = next_step_map->map_size.width;
+        copy_map->player_pos.height = next_step_map->player_pos.height;
+        copy_map->player_pos.width = next_step_map->player_pos.width;       
+        
+        if (marker == false){
+            // free(next_step_map->map);
+            // free(next_step_map);
+            // free(current_step_map->map);
+            // free(current_step_map);
         }
-        free(valid_movement_result);
+        
+
+
+        *current_step_map = *copy_map;
     }
+
+    // if (comparaison_two_maps(*loaded_map, *current_step_map) == false){
+    //     free(current_step_map->map);
+    //     free(current_step_map);
+    // }
+    // move_tool *valid_movement_result = valid_movement(current_step_map, loaded_map);
+    // if (valid_movement_result->movement_possible == true){
+    //     free(current_step_map->map);
+    //     free(current_step_map);
+    // }
+    // free(valid_movement_result);
+
+    free(copy_map);
+    return current_step_map;
 }
