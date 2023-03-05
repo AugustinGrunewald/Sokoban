@@ -266,3 +266,23 @@ bool comparaison_two_adresses(const char *adress_1, const char *adress_2){
         return result;
     }
 }
+
+game_map *replay(game_map *loaded_map, int length_direction_string, char *direction_string){
+    //initialization of the loop
+    game_map *current_step_map = loaded_map;
+
+    for(int direction_step = 0; direction_step < length_direction_string; direction_step++){
+
+        char current_direction = direction_string[direction_step];
+        move_tool *valid_movement_result = valid_movement(current_step_map, current_direction);
+
+        game_map *next_step_map = move(current_step_map, current_direction);
+
+
+        if (valid_movement_result->movement_possible == true){
+            free(next_step_map->map);
+            free(next_step_map);
+        }
+        free(valid_movement_result);
+    }
+}
