@@ -37,6 +37,7 @@ game_map *move(game_map *p_initial_map, char direction){
     move_tool *valid_movement_result = valid_movement(p_initial_map, direction);
 
     if (valid_movement_result->movement_possible == false) {
+        free(valid_movement_result);
         return p_initial_map;
     } 
     
@@ -57,6 +58,7 @@ game_map *move(game_map *p_initial_map, char direction){
 
         p_new_map->map = valid_movement_result->map;
 
+        free(valid_movement_result);
         return p_new_map;
     }
 }
@@ -115,6 +117,7 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
         result->movement_possible = false;
         result->map = p_initial_map->map; 
 
+        free(p_new_map);
         return result;
     }
 
@@ -158,8 +161,9 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
         //checking if there is a wall
         if (p_initial_map->map[pointed_element_indice_further] == available_elements[6]){
             result->movement_possible = false;
-            result->map = p_initial_map->map; 
+            result->map = p_initial_map->map;
 
+            free(p_new_map);
             return result;
         
         }
@@ -168,6 +172,7 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
             result->movement_possible = false;
             result->map = p_initial_map->map; 
 
+            free(p_new_map);
             return result;
         }
 
@@ -179,10 +184,6 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
     else{
         return result;
     }
-
-    // free(p_new_map);
-    // free(result);           not working
-    // free(p_initial_map);
 }
 
 double_couple tool_direction(int direction_associated_int){
@@ -239,6 +240,27 @@ bool comparaison_two_maps(game_map first_map, game_map second_map){
             if (first_map_string[i] != second_map_string[i]){
                 result = false;
                 break;
+            }
+        }
+        return result;
+    }
+}
+
+bool comparaison_two_adresses(const char *adress_1, const char *adress_2){
+    bool result = true;
+    
+    int adress_1_length = strlen(adress_1);
+    int adress_2_length = strlen(adress_2);
+
+    if (adress_1_length != adress_2_length){
+        result = false;
+        return result;
+    }
+    else{
+        for (int i = 0; i < adress_1_length; i++){
+            if (adress_1[i] != adress_2[i]){
+                result = false;
+                return result;
             }
         }
         return result;

@@ -109,4 +109,17 @@ double_couple tool_direction(int direction_associated_int);
  */
 bool comparaison_two_maps(game_map first_map, game_map second_map);
     
+
+/**
+ * @brief Testing if two adresses are the same.
+ * 
+ * @param adress_1 The first adress.
+ * 
+ * @param adress_2 The second adress.
+ * 
+ * @return true 
+ * @return false 
+ */
+bool comparaison_two_adresses(const char *adress_1, const char *adress_2);
+
 #endif
