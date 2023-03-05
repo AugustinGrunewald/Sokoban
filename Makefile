@@ -74,9 +74,7 @@ compile-all: example-main read-file-formatted read-file-text \
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
 # \ allows to go to the next line
-ALL_TESTS = test-move 
-
-# the real line after ALL_TESTS should be : test-loader test-move  -> should be ended after freeing the move functions
+ALL_TESTS = test-loader test-move 
 
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done
