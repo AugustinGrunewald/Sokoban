@@ -41,7 +41,7 @@ void test_move(const char *adress_original_file, const char *adress_result_file)
 }
 
 int main(void){
-    printf("* Starting moving tests...\n");
+    printf("* Starting moving tests ...\n");
     printf("\n");
 
     //simple player movements

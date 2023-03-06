@@ -28,7 +28,7 @@ clean:
 # \ allows to go on the next line
 check-syntax: example-main.o read-file-formatted.o read-file-text.o \
 	write-fact.o test-dummy.o sokoban.o loader.o test-loader.o \
-	test-move.o test-replay.o 
+	test-move.o test-replay.o replay.o
 
 # put all the rules to build your applications and tests here (see examples)
 test-loader: test-loader.o loader.o sokoban.o
@@ -39,6 +39,9 @@ test-move: test-move.o loader.o sokoban.o
 
 test-replay: test-replay.o loader.o sokoban.o
 	$(CC) $(CFLAGS) -o test-replay test-replay.o loader.o sokoban.o
+
+replay: replay.o loader.o sokoban.o
+	$(CC) $(CFLAGS) -o replay replay.o loader.o sokoban.o
 
 example-main: example-main.o
 	$(CC) $(CFLAGS) -o example-main example-main.o
@@ -69,8 +72,13 @@ app-ex-gui: app-ex-gui.o gui.o
 # put all your applications and tests executables as prerequisite of this rule
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
-	write-fact test-dummy app-ex-loader app-ex-gui test-loader test-move test-replay \
+	write-fact test-dummy app-ex-loader app-ex-gui test-loader \ 
+	test-move test-replay replay \
 	 
+compile-all-macOS: example-main read-file-formatted read-file-text \
+	write-fact test-dummy app-ex-loader test-loader test-move test-replay \
+	replay \
+
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
 # \ allows to go to the next line
