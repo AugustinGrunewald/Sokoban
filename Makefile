@@ -72,7 +72,7 @@ app-ex-gui: app-ex-gui.o gui.o
 # put all your applications and tests executables as prerequisite of this rule
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
-	write-fact test-dummy app-ex-loader app-ex-gui test-loader \ 
+	write-fact test-dummy app-ex-loader app-ex-gui test-loader \
 	test-move test-replay replay \
 	 
 compile-all-macOS: example-main read-file-formatted read-file-text \

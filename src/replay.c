@@ -14,20 +14,32 @@
 #include "sokoban.h"
 
 int main(int argc, char *argv[]){
-    // testing if the correct input has been given
-    if (argc > 3) {
+    //testing if the correct input has been given
+    if (argc != 4) {
         fprintf(stderr, "You must provide the rigth input!\n");
         exit(EXIT_FAILURE);
     }
 
     //loaded the initial map, the plan and the number of movements wanted
     const char *loaded_adress = argv[1];
-    char *string_representing_length = argv[2];
+    const char *string_plan_length = argv[2];
     char *plan = argv[3];
 
-    printf("* Starting replay with ... \n");
+    //transcoding the string representing the plan length into an int
+    int plan_length = atoi(string_plan_length);
+    
+    //executing the replay
+    game_map *original_map = map_loader(loaded_adress);
+    game_map *result_map = replay(original_map, plan_length, plan);
 
+    printf("* Starting replay with %s, a plan length of %d and a plan of %s ... \n", loaded_adress, plan_length, plan);
+ 
     //print the final map
+    print_map(*result_map);
+
+    //freeing the function
+    free(original_map->map);
+    free(original_map);
 
     return 0;
 }
