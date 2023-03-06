@@ -28,7 +28,7 @@ clean:
 # \ allows to go on the next line
 check-syntax: example-main.o read-file-formatted.o read-file-text.o \
 	write-fact.o test-dummy.o sokoban.o loader.o test-loader.o \
-	test-move.o test-replay.o replay.o
+	test-move.o test-replay.o replay.o play.o
 
 # put all the rules to build your applications and tests here (see examples)
 test-loader: test-loader.o loader.o sokoban.o
@@ -42,6 +42,9 @@ test-replay: test-replay.o loader.o sokoban.o
 
 replay: replay.o loader.o sokoban.o
 	$(CC) $(CFLAGS) -o replay replay.o loader.o sokoban.o
+
+play: play.o loader.o sokoban.o gui.o
+	$(CC) $(CFLAGS) _o play play.o loader.o sokoban.o gui.o $(LDFLAGS)
 
 example-main: example-main.o
 	$(CC) $(CFLAGS) -o example-main example-main.o
@@ -73,7 +76,7 @@ app-ex-gui: app-ex-gui.o gui.o
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
 	write-fact test-dummy app-ex-loader app-ex-gui test-loader \
-	test-move test-replay replay \
+	test-move test-replay replay play \
 	 
 compile-all-macOS: example-main read-file-formatted read-file-text \
 	write-fact test-dummy app-ex-loader test-loader test-move test-replay \

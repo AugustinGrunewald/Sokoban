@@ -278,22 +278,31 @@ game_map *replay(game_map *loaded_map, int length_direction_string, char *direct
         bool marker = comparaison_two_maps(*next_step_map, *current_step_map);
 
         //copying the value of the current_step_map in a dedicated allocated place
+        //copying the map in the copy allocated place
+        // for (int copy_ind = 0; copy_ind < next_step_map->map_size.height * next_step_map->map_size.width; copy_ind++){
+        //     copy_map->map[copy_ind] = next_step_map->map[copy_ind];
+        //     printf("%c",(copy_map->map)[copy_ind]);
+        // }
         copy_map->map = next_step_map->map;
         copy_map->map_size.height = next_step_map->map_size.height;
         copy_map->map_size.width = next_step_map->map_size.width;
         copy_map->player_pos.height = next_step_map->player_pos.height;
         copy_map->player_pos.width = next_step_map->player_pos.width;       
         
-        if (marker == false){
+        if (marker == false){ //if there was a movement
             // free(next_step_map->map);
             // free(next_step_map);
             // free(current_step_map->map);
             // free(current_step_map);
         }
-        
 
 
-        *current_step_map = *copy_map;
+        // *current_step_map = *copy_map;
+        current_step_map->map = copy_map->map;
+        current_step_map->map_size.height = copy_map->map_size.height;
+        current_step_map->map_size.width = copy_map->map_size.width;
+        current_step_map->player_pos.height = copy_map->player_pos.height;
+        current_step_map->player_pos.width = copy_map->player_pos.width;
     }
 
     // if (comparaison_two_maps(*loaded_map, *current_step_map) == false){
@@ -309,4 +318,15 @@ game_map *replay(game_map *loaded_map, int length_direction_string, char *direct
 
     free(copy_map);
     return current_step_map;
+}
+
+char **map_to_matrix_transcoder(game_map *used_map, int heigth, int width){
+    char result[heigth][width];
+    char *string_map = used_map->map;
+    for (int ind_height = 0; ind_height < heigth; ind_height++){
+        for (int ind_width = 0; ind_width < width; ind_width++){
+            result[ind_height][ind_width] = string_map[ind_width + width * ind_height];
+        }
+    }
+    return result;
 }
