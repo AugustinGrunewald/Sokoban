@@ -37,19 +37,19 @@ int main(void){
 
     //tests with soko_dumb.in
     test_replay("./data/soko_dumb.in", 3, "SSSEENN", "./data/soko_dumb_1.in");
-    // test_replay("./data/soko_dumb.in", 5, "SSSEENN", "./data/soko_dumb_2.in");
-    // test_replay("./data/soko_dumb.in", 7, "SSSEENN", "./data/soko_dumb_win.in");
-    // test_replay("./data/soko_dumb.in", 7, "ESEESSWNN", "./data/soko_dumb_3.in");
-    // test_replay("./data/soko_dumb.in", 9, "ESEESSWNN", "./data/soko_dumb_win.in");
-    // printf("\n");
+    test_replay("./data/soko_dumb.in", 5, "SSSEENN", "./data/soko_dumb_2.in");
+    test_replay("./data/soko_dumb.in", 7, "SSSEENN", "./data/soko_dumb_win.in");
+    test_replay("./data/soko_dumb.in", 7, "ESEESSWNN", "./data/soko_dumb_3.in");
+    test_replay("./data/soko_dumb.in", 9, "ESEESSWNN", "./data/soko_dumb_win.in");
+    printf("\n");
 
-    // //tests with soko1
-    // //extracting the big plan from soko1-plan.in
-    // char big_plan[] = "NNWWSWWNEESWSWWWNNEESSESSWWNSEENNNENENESSSWSWENEESWWNENNWWSWWNWWSSESSEENNWNEWNEEENESSSWSWENENNWWWWWWSSESSEENNWESEENEESWWWENENNWWWWSSENWNEEENESSNWWWWWWSSESSEENEEEENWSWWWNNWNEEENESSSESWW";
-    // test_replay("./data/soko1.in", 100, big_plan, "./data/soko1_1.in");
-    // test_replay("./data/soko1.in", 150, big_plan, "./data/soko1_2.in");
-    // test_replay("./data/soko1.in", 184, big_plan, "./data/soko1_win.in");
-    // printf("\n");
+    //tests with soko1
+    //extracting the big plan from soko1-plan.in
+    char big_plan[] = "NNWWSWWNEESWSWWWNNEESSESSWWNSEENNNENENESSSWSWENEESWWNENNWWSWWNWWSSESSEENNWNEWNEEENESSSWSWENENNWWWWWWSSESSEENNWESEENEESWWWENENNWWWWSSENWNEEENESSNWWWWWWSSESSEENEEEENWSWWWNNWNEEENESSSESWW";
+    test_replay("./data/soko1.in", 100, big_plan, "./data/soko1_1.in");
+    test_replay("./data/soko1.in", 150, big_plan, "./data/soko1_2.in");
+    test_replay("./data/soko1.in", 184, big_plan, "./data/soko1_win.in");
+    printf("\n");
 
 
     printf("  +-> OK!\n");

@@ -137,17 +137,4 @@ bool comparaison_two_adresses(const char *adress_1, const char *adress_2);
 game_map *replay(game_map *loaded_map, int length_direction_string, char *direction_string);
 
 
-/**
- * @brief Simple function to transform the string representing the map into a matrix representing the map.
- * 
- * @param used_map The structure representing the input map.
- * 
- * @param heigth The height of the map.
- *  
- * @param width The width of the map.
- * 
- * @return char** 
- */
-char **map_to_matrix_transcoder(game_map *used_map, int heigth, int width);
-
 #endif

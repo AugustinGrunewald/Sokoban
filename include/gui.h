@@ -32,7 +32,7 @@ void GUI_init(char *title, int width, int height);
  *               Each `char` represents a symbol as defined in
  *               the `symbols` array
  */
-void GUI_show(int width, int height, char level[height][width]);
+void GUI_show(int width, int height, char *level);
 
 /**
  * @brief Get the key pressed by the user

@@ -44,7 +44,7 @@ replay: replay.o loader.o sokoban.o
 	$(CC) $(CFLAGS) -o replay replay.o loader.o sokoban.o
 
 play: play.o loader.o sokoban.o gui.o
-	$(CC) $(CFLAGS) _o play play.o loader.o sokoban.o gui.o $(LDFLAGS)
+	$(CC) $(CFLAGS) -o play play.o loader.o sokoban.o gui.o $(LDFLAGS)
 
 example-main: example-main.o
 	$(CC) $(CFLAGS) -o example-main example-main.o
@@ -75,9 +75,11 @@ app-ex-gui: app-ex-gui.o gui.o
 # put all your applications and tests executables as prerequisite of this rule
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
-	write-fact test-dummy app-ex-loader app-ex-gui test-loader \
+	write-fact test-dummy app-ex-loader test-loader \
 	test-move test-replay replay play \
 	 
+#app-ex-gui
+
 compile-all-macOS: example-main read-file-formatted read-file-text \
 	write-fact test-dummy app-ex-loader test-loader test-move test-replay \
 	replay \
@@ -85,9 +87,7 @@ compile-all-macOS: example-main read-file-formatted read-file-text \
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
 # \ allows to go to the next line
-ALL_TESTS = test-replay
-
-# test-loader test-move
+ALL_TESTS = test-loader test-move test-replay 
 
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done

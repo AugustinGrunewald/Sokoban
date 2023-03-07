@@ -32,19 +32,34 @@ void print_map(game_map used_map){
 }
 
 game_map *move(game_map *p_initial_map, char direction){
-    // testing the faisability of the movement
+    //testing the faisability of the movement and initializing the new dynamically allocated map
 
     move_tool *valid_movement_result = valid_movement(p_initial_map, direction);
+    game_map *p_new_map = (game_map *) malloc(sizeof(game_map));
+    char *new_map_string = (char *) malloc(p_initial_map->map_size.height*p_initial_map->map_size.width*sizeof(char)); 
 
     if (valid_movement_result->movement_possible == false) {
-        free(valid_movement_result);
-        return p_initial_map;
+        //copying the parameters unchanged
+        p_new_map->map_size.height = p_initial_map->map_size.height;
+        p_new_map->map_size.width = p_initial_map->map_size.width;
+        p_new_map->player_pos.height = p_initial_map->player_pos.height;
+        p_new_map->player_pos.width = p_initial_map->player_pos.width;
+        
+        for (int ind_copy = 0; ind_copy < p_initial_map->map_size.height * p_initial_map->map_size.width; ind_copy++){
+            new_map_string[ind_copy] = (p_initial_map->map)[ind_copy];
+        }
+
+        // p_new_map->map = valid_movement_result->map;
+
+
+        free(valid_movement_result->map);
+        p_new_map->map = new_map_string;  
     } 
     
     else {
-        // initializing the new dynamically allocated map, copying the parameters unchanged
-        game_map *p_new_map = (game_map *) malloc(sizeof(game_map));
-        p_new_map->map_size = p_initial_map->map_size;
+        //copying the parameters unchanged
+        p_new_map->map_size.height = p_initial_map->map_size.height;
+        p_new_map->map_size.width = p_initial_map->map_size.width;
        
         char available_direction[] = "NSEW";
 
@@ -56,11 +71,13 @@ game_map *move(game_map *p_initial_map, char direction){
             } 
         }
 
+        free(new_map_string);
         p_new_map->map = valid_movement_result->map;
-
-        free(valid_movement_result);
-        return p_new_map;
     }
+
+    // free(valid_movement_result->map);
+    free(valid_movement_result);
+    return p_new_map;
 }
 
 move_tool *valid_movement(game_map *p_initial_map, char direction){
@@ -107,8 +124,14 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
         } else {
             p_new_map[pointed_element_indice] = available_elements[0];
         }
+        
+        
+        // for (int ind_copy = 0; ind_copy < p_initial_map->map_size.height * p_initial_map->map_size.width; ind_copy++){
+        //     (result->map)[ind_copy] = p_new_map[ind_copy];
+        // }
 
         result->map = p_new_map; 
+        // free(p_new_map);
         return result;
     }
 
@@ -117,7 +140,7 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
         result->movement_possible = false;
         result->map = p_initial_map->map; 
 
-        free(p_new_map);
+        // free(p_new_map);
         return result;
     }
 
@@ -163,7 +186,7 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
             result->movement_possible = false;
             result->map = p_initial_map->map;
 
-            free(p_new_map);
+            // free(p_new_map);
             return result;
         
         }
@@ -172,7 +195,7 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
             result->movement_possible = false;
             result->map = p_initial_map->map; 
 
-            free(p_new_map);
+            // free(p_new_map);
             return result;
         }
 
@@ -320,13 +343,13 @@ game_map *replay(game_map *loaded_map, int length_direction_string, char *direct
     return current_step_map;
 }
 
-char **map_to_matrix_transcoder(game_map *used_map, int heigth, int width){
-    char result[heigth][width];
-    char *string_map = used_map->map;
-    for (int ind_height = 0; ind_height < heigth; ind_height++){
-        for (int ind_width = 0; ind_width < width; ind_width++){
-            result[ind_height][ind_width] = string_map[ind_width + width * ind_height];
-        }
-    }
-    return result;
-}
+// char **map_to_matrix_transcoder(game_map *used_map, int heigth, int width){
+//     char result[heigth][width];
+//     char *string_map = used_map->map;
+//     for (int ind_height = 0; ind_height < heigth; ind_height++){
+//         for (int ind_width = 0; ind_width < width; ind_width++){
+//             result[ind_height][ind_width] = string_map[ind_width + width * ind_height];
+//         }
+//     }
+//     return result;
+// }
