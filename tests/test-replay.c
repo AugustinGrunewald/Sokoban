@@ -24,8 +24,9 @@ void test_replay(const char *adress_original_file, int plan_length, char *plan, 
     assert(test_result == true);
     printf("  | | | Success \n");
 
-    // free(result_map_after_movements->map);
-    // free(result_map_after_movements);
+    //freeing the allocations 
+    free(result_map_after_movements->map);
+    free(result_map_after_movements);
     free(result_map->map);
     free(result_map);
     free(original_map->map);

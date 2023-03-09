@@ -27,17 +27,12 @@ void test_move(const char *adress_original_file, const char *adress_result_file)
     assert(test_result == true);
     printf("  | | | Success \n");
 
-
-    // //if condition : avoid double free issues with files that got the same names, when available move
-    // if (comparaison_two_adresses(adress_original_file, adress_result_file) == false){
-    //     free(result_map_with_move_function->map);
-    //     free(result_map_with_move_function);
-    // }
+    //freeing the allocations
     free(result_map_with_move_function->map);
     free(result_map_with_move_function);
     free(result_map->map);
     free(result_map);
-    // free(original_map->map);
+    free(original_map->map);
     free(original_map);
 }
 

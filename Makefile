@@ -89,8 +89,13 @@ compile-all-macOS: example-main read-file-formatted read-file-text \
 # \ allows to go to the next line
 ALL_TESTS = test-loader test-move test-replay 
 
+ALL_TESTS_DEBUG = test-replay 
+
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done
+
+launch-tests-debug: $(ALL_TESTS_DEBUG)
+	for x in $(ALL_TESTS_DEBUG); do ./$$x --all; done
 
 # add all .c, .h and .txt files in repository
 svn-add-all-files:

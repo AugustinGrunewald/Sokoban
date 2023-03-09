@@ -33,10 +33,8 @@ void print_map(game_map used_map){
 
 game_map *move(game_map *p_initial_map, char direction){
     //testing the faisability of the movement and initializing the new dynamically allocated map
-
     move_tool *valid_movement_result = valid_movement(p_initial_map, direction);
     game_map *p_new_map = (game_map *) malloc(sizeof(game_map));
-    char *new_map_string = (char *) malloc(p_initial_map->map_size.height*p_initial_map->map_size.width*sizeof(char)); 
 
     if (valid_movement_result->movement_possible == false) {
         //copying the parameters unchanged
@@ -45,15 +43,7 @@ game_map *move(game_map *p_initial_map, char direction){
         p_new_map->player_pos.height = p_initial_map->player_pos.height;
         p_new_map->player_pos.width = p_initial_map->player_pos.width;
         
-        for (int ind_copy = 0; ind_copy < p_initial_map->map_size.height * p_initial_map->map_size.width; ind_copy++){
-            new_map_string[ind_copy] = (p_initial_map->map)[ind_copy];
-        }
-
-        // p_new_map->map = valid_movement_result->map;
-
-
-        free(valid_movement_result->map);
-        p_new_map->map = new_map_string;  
+        p_new_map->map = valid_movement_result->map;
     } 
     
     else {
@@ -70,12 +60,8 @@ game_map *move(game_map *p_initial_map, char direction){
                 p_new_map->player_pos.width = p_initial_map->player_pos.width + tool_direction(i).first_level.width;                
             } 
         }
-
-        free(new_map_string);
         p_new_map->map = valid_movement_result->map;
     }
-
-    // free(valid_movement_result->map);
     free(valid_movement_result);
     return p_new_map;
 }
@@ -124,23 +110,20 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
         } else {
             p_new_map[pointed_element_indice] = available_elements[0];
         }
-        
-        
-        // for (int ind_copy = 0; ind_copy < p_initial_map->map_size.height * p_initial_map->map_size.width; ind_copy++){
-        //     (result->map)[ind_copy] = p_new_map[ind_copy];
-        // }
 
         result->map = p_new_map; 
-        // free(p_new_map);
         return result;
     }
 
     //checking if there is a wall
     if (p_initial_map->map[pointed_element_indice] == available_elements[6]){
         result->movement_possible = false;
-        result->map = p_initial_map->map; 
-
-        // free(p_new_map);
+        
+        for (int i = 0; i < p_initial_map->map_size.height * p_initial_map->map_size.width; i++){
+            p_new_map[i] = p_initial_map->map[i];
+        }
+    
+        result->map = p_new_map; 
         return result;
     }
 
@@ -184,18 +167,22 @@ move_tool *valid_movement(game_map *p_initial_map, char direction){
         //checking if there is a wall
         if (p_initial_map->map[pointed_element_indice_further] == available_elements[6]){
             result->movement_possible = false;
-            result->map = p_initial_map->map;
-
-            // free(p_new_map);
+            for (int i = 0; i < p_initial_map->map_size.height * p_initial_map->map_size.width; i++){
+                p_new_map[i] = p_initial_map->map[i];
+            }
+    
+            result->map = p_new_map; 
             return result;
         
         }
         //checking if there is a box on an empty cell or on a storage destination
         if (p_initial_map->map[pointed_element_indice_further] == available_elements[2] || p_initial_map->map[pointed_element_indice_further] == available_elements[3]){
             result->movement_possible = false;
-            result->map = p_initial_map->map; 
-
-            // free(p_new_map);
+            for (int i = 0; i < p_initial_map->map_size.height * p_initial_map->map_size.width; i++){
+                p_new_map[i] = p_initial_map->map[i];
+            }
+    
+            result->map = p_new_map; 
             return result;
         }
 
@@ -292,64 +279,19 @@ bool comparaison_two_adresses(const char *adress_1, const char *adress_2){
 
 game_map *replay(game_map *loaded_map, int length_direction_string, char *direction_string){
     game_map *current_step_map = loaded_map;
-    game_map *copy_map = (game_map *) malloc(sizeof(game_map));
 
-    for(int direction_step = 0; direction_step < length_direction_string; direction_step++){
+    current_step_map = move(current_step_map, direction_string[0]);
+
+    for(int direction_step = 1; direction_step < length_direction_string; direction_step++){
         char current_direction = direction_string[direction_step];
 
         game_map *next_step_map = move(current_step_map, current_direction);
-        bool marker = comparaison_two_maps(*next_step_map, *current_step_map);
 
-        //copying the value of the current_step_map in a dedicated allocated place
-        //copying the map in the copy allocated place
-        // for (int copy_ind = 0; copy_ind < next_step_map->map_size.height * next_step_map->map_size.width; copy_ind++){
-        //     copy_map->map[copy_ind] = next_step_map->map[copy_ind];
-        //     printf("%c",(copy_map->map)[copy_ind]);
-        // }
-        copy_map->map = next_step_map->map;
-        copy_map->map_size.height = next_step_map->map_size.height;
-        copy_map->map_size.width = next_step_map->map_size.width;
-        copy_map->player_pos.height = next_step_map->player_pos.height;
-        copy_map->player_pos.width = next_step_map->player_pos.width;       
-        
-        if (marker == false){ //if there was a movement
-            // free(next_step_map->map);
-            // free(next_step_map);
-            // free(current_step_map->map);
-            // free(current_step_map);
-        }
+        free(current_step_map->map);
+        free(current_step_map);
 
-
-        // *current_step_map = *copy_map;
-        current_step_map->map = copy_map->map;
-        current_step_map->map_size.height = copy_map->map_size.height;
-        current_step_map->map_size.width = copy_map->map_size.width;
-        current_step_map->player_pos.height = copy_map->player_pos.height;
-        current_step_map->player_pos.width = copy_map->player_pos.width;
+        current_step_map = next_step_map;      
     }
-
-    // if (comparaison_two_maps(*loaded_map, *current_step_map) == false){
-    //     free(current_step_map->map);
-    //     free(current_step_map);
-    // }
-    // move_tool *valid_movement_result = valid_movement(current_step_map, loaded_map);
-    // if (valid_movement_result->movement_possible == true){
-    //     free(current_step_map->map);
-    //     free(current_step_map);
-    // }
-    // free(valid_movement_result);
-
-    free(copy_map);
     return current_step_map;
 }
 
-// char **map_to_matrix_transcoder(game_map *used_map, int heigth, int width){
-//     char result[heigth][width];
-//     char *string_map = used_map->map;
-//     for (int ind_height = 0; ind_height < heigth; ind_height++){
-//         for (int ind_width = 0; ind_width < width; ind_width++){
-//             result[ind_height][ind_width] = string_map[ind_width + width * ind_height];
-//         }
-//     }
-//     return result;
-// }
