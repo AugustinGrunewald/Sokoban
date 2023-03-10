@@ -101,5 +101,5 @@ launch-tests-debug: $(ALL_TESTS_DEBUG)
 
 # add all .c, .h and .txt files in repository
 svn-add-all-files:
-	svn add --force src/*.c include/*.h data/*.txt --auto-props --parents --depth infinity -q
+	svn add --force src/*.c include/*.h tests/*.c data/*.txt --auto-props --parents --depth infinity -q
 
