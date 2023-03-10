@@ -28,7 +28,7 @@ clean:
 # \ allows to go on the next line
 check-syntax: example-main.o read-file-formatted.o read-file-text.o \
 	write-fact.o test-dummy.o sokoban.o loader.o test-loader.o \
-	test-move.o test-replay.o replay.o play.o
+	test-move.o test-replay.o replay.o play.o test-linked-list-map.o
 
 # put all the rules to build your applications and tests here (see examples)
 test-loader: test-loader.o loader.o sokoban.o
@@ -39,6 +39,9 @@ test-move: test-move.o loader.o sokoban.o
 
 test-replay: test-replay.o loader.o sokoban.o
 	$(CC) $(CFLAGS) -o test-replay test-replay.o loader.o sokoban.o
+
+test-linked-list-map: test-linked-list-map.o loader.o sokoban.o linked_list_map.o
+	$(CC) $(CFLAGS) -o test-linked-list-map test-linked-list-map.o loader.o sokoban.o linked_list_map.o
 
 replay: replay.o loader.o sokoban.o
 	$(CC) $(CFLAGS) -o replay replay.o loader.o sokoban.o
@@ -76,20 +79,19 @@ app-ex-gui: app-ex-gui.o gui.o
 # \ allows to go to the next line
 compile-all: example-main read-file-formatted read-file-text \
 	write-fact test-dummy app-ex-loader test-loader \
-	test-move test-replay replay play \
+	test-move test-replay replay play test-linked-list-map\
 	 
-#app-ex-gui
 
 compile-all-macOS: example-main read-file-formatted read-file-text \
 	write-fact test-dummy app-ex-loader test-loader test-move test-replay \
-	replay \
+	replay test-linked-list-map\
 
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
 # \ allows to go to the next line
-ALL_TESTS = test-loader test-move test-replay 
+ALL_TESTS = test-loader test-move test-replay test-linked-list-map
 
-ALL_TESTS_DEBUG = test-replay 
+ALL_TESTS_DEBUG = test-linked-list-map 
 
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done
