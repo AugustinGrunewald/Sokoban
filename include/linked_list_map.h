@@ -1,5 +1,5 @@
-#ifndef LINKED_LIST_INT_H
-#define LINKED_LIST_INT_H
+#ifndef LINKED_LIST_MAP_H
+#define LINKED_LIST_MAP_H
 
 #include <stdbool.h>
 #include "sokoban.h"
