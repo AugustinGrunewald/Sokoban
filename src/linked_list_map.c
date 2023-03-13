@@ -85,21 +85,25 @@ linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map
 linked_list_map remove_element(linked_list_map list, int indice){
     cell_map *current_cell = list;
     cell_map *old_cell = list;
+    cell_map *copy_cell;
 
     //particular case : indice = 0
     if (indice == 0){
         return list->p_next;
     }
     else{
-        for (int ind = 0; ind < indice + 1; ind++){
+        for (int ind = 0; ind < indice; ind++){
             current_cell = current_cell->p_next;
         }
         for (int ind = 0; ind < indice - 1; ind++){
             old_cell = old_cell->p_next;
         }
 
+        copy_cell = current_cell;
+        current_cell = current_cell->p_next;
         old_cell->p_next = current_cell;
-
+        free(copy_cell);
+        
         return list;
     }
 }
