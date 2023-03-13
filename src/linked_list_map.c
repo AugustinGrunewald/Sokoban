@@ -64,6 +64,7 @@ linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map
 
     //particular case : indice = 0
     if (indice == 0){
+        free(new_cell);
         return cons(p_map, list);
     }
     else{

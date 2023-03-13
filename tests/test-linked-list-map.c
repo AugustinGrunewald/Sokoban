@@ -58,7 +58,6 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
 
     //Checking if the remove and insert function works
     printf("  |  Checking the remove and insert function on the defined list ... \n");
-    list = cons(loaded_map_1, cons(loaded_map_2, cons(loaded_map_3, cons(loaded_map_4, cons(loaded_map_5, nil())))));
     
     linked_list_map list_1 = remove_element(list, 0);
     bool test_result_remove_1 = comparaison_two_maps(*loaded_map_2, *get_element(list_1, 0));
@@ -67,6 +66,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     list_1 = insert_element(list_1, 0, loaded_map_1);
     bool test_result_insert_1 = comparaison_two_maps(*loaded_map_1, *get_element(list_1, 0));
     assert(test_result_insert_1 == true);
+    free(list_1);
     printf("  | |  Insert map 1 ... Success \n");
 
     linked_list_map list_2 = remove_element(list, 2);
