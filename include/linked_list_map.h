@@ -11,6 +11,9 @@ typedef cell_map *linked_list_map;
 struct cell_map {
     game_map *p_map;
     cell_map *p_next;
+    cell_map *p_previous;
+    char direction;
+    int depth;
 };
 
 /**
