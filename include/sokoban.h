@@ -10,7 +10,7 @@ typedef struct move_tool move_tool;
 
 
 /**
- * @brief The structure representing the position of the player
+ * @brief The structure representing the position of the player.
  * 
  */
 struct couple {
@@ -22,6 +22,10 @@ struct couple {
 };
 
 
+/**
+ * @brief A specific structure that contains two couple (used in a specific case).
+ * 
+ */
 struct double_couple {
     /** a couple representing the first available movement*/
     couple first_level;
@@ -31,7 +35,7 @@ struct double_couple {
 };
 
 /**
- * @brief The structure representing the game map
+ * @brief The structure representing the game map.
  * 
  */
 struct game_map {
@@ -46,6 +50,10 @@ struct game_map {
 };
 
 
+/**
+ * @brief The structure returned by tha available movement function: returns a boolean and a string representing the map.
+ * 
+ */
 struct move_tool {
     /** A boolean showing if the movement is possible*/
     bool movement_possible;
@@ -70,7 +78,7 @@ void print_map(game_map used_map);
  * 
  * @param direction The direction of the wanted movement (N, S, E, W). 
  * 
- * @return game_map* 
+ * @return game_map* the new map after the movement.
  */
 game_map *move(game_map *p_initial_map, char direction);
 
@@ -82,7 +90,7 @@ game_map *move(game_map *p_initial_map, char direction);
  * 
  * @param direction The direction of the wanted movement (N, S, E, W).
  * 
- * @return move_tool
+ * @return move_tool the structure used in the moove function to know if the movement is possible and what is the new string representing the map.
  */
 move_tool *valid_movement(game_map *p_initial_map, char direction);
 
@@ -92,7 +100,7 @@ move_tool *valid_movement(game_map *p_initial_map, char direction);
  * 
  * @param direction_associated_int direction (N-0, S-1, E-2, W-3).
  * 
- * @return double_couple 
+ * @return double_couple the structure that contains the informations used to moove the player on the map in the function valid movement and move.
  */
 double_couple tool_direction(int direction_associated_int);
 
@@ -104,8 +112,8 @@ double_couple tool_direction(int direction_associated_int);
  * 
  * @param second_map The second map.
  *  
- * @return true 
- * @return false 
+ * @return true if the two maps are the same.
+ * @return false if the two maps are different.
  */
 bool comparaison_two_maps(game_map first_map, game_map second_map);
     
@@ -117,8 +125,8 @@ bool comparaison_two_maps(game_map first_map, game_map second_map);
  * 
  * @param adress_2 The second adress.
  * 
- * @return true 
- * @return false 
+ * @return true if the two adresses are the same.
+ * @return false if the two adresses are different.
  */
 bool comparaison_two_adresses(const char *adress_1, const char *adress_2);
 
@@ -132,7 +140,7 @@ bool comparaison_two_adresses(const char *adress_1, const char *adress_2);
  * 
  * @param direction_string A string representing the plan.
  *  
- * @return game_map* 
+ * @return game_map* the structure of the game map after following all the movements given in arguments.
  */
 game_map *replay(game_map *loaded_map, int length_direction_string, char *direction_string);
 

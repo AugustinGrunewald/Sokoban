@@ -19,7 +19,7 @@ struct cell_map {
 /**
  * @brief Creating an empty linked list.
  * 
- * @return linked_list_map 
+ * @return linked_list_map empty.
  */
 linked_list_map nil();
 
@@ -31,7 +31,7 @@ linked_list_map nil();
  * 
  * @param list the list in which you add the new element.
  * 
- * @return linked_list_map 
+ * @return linked_list_map the new linked list with the game map as new first cell. 
  */
 linked_list_map cons(game_map *p_map, linked_list_map list);
 
@@ -41,7 +41,7 @@ linked_list_map cons(game_map *p_map, linked_list_map list);
  * 
  * @param list the list for which you want to know the size.
  * 
- * @return int 
+ * @return int representing the size of the linked list.
  */
 int size(linked_list_map list);
 
@@ -51,8 +51,8 @@ int size(linked_list_map list);
  * 
  * @param list the list that is tested.
  * 
- * @return true 
- * @return false 
+ * @return true if the list is empty.
+ * @return false if the list isn't empty.
  */
 bool is_empty(linked_list_map list);
 
@@ -72,7 +72,7 @@ void print_list(linked_list_map list);
  * 
  * @param indice the indice of the element you want to get.
  * 
- * @return game_map * 
+ * @return game_map* the wanted game map in the list.
  */
 game_map *get_element(linked_list_map list, int indice);
 
@@ -86,7 +86,7 @@ game_map *get_element(linked_list_map list, int indice);
  *  
  * @param p_map the game map you want to insert.
  * 
- * @return linked_list_map 
+ * @return linked_list_map the new list with the insertion of a new cell containing all the given informations.
  */
 linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map);
 
@@ -98,7 +98,7 @@ linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map
  * 
  * @param indice the indice of the cell you want to remove.
  * 
- * @return linked_list_map 
+ * @return linked_list_map the new list without the cell you wanted. 
  */
 linked_list_map remove_element(linked_list_map list_remove_element, int indice);
 
