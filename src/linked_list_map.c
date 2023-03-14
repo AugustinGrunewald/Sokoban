@@ -11,9 +11,12 @@ linked_list_map nil(){
     return NULL;
 }
 
-linked_list_map cons(game_map *p_map, linked_list_map list){
+linked_list_map cons(game_map *p_map, linked_list_map list, char direction, int depth, cell_map *p_mother){
     cell_map *p_new_list = (cell_map *) malloc(sizeof(cell_map));
 
+    p_new_list->depth = depth;
+    p_new_list->direction = direction;
+    p_new_list->p_mother = p_mother;
     p_new_list->p_map = p_map;
     p_new_list->p_next = list; 
     return p_new_list;
@@ -57,7 +60,7 @@ game_map *get_element(linked_list_map list, int indice){
     return current_cell->p_map;
 }
 
-linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map){
+linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map, char direction, int depth, cell_map *p_mother){
     cell_map *current_cell = list;
     cell_map *old_cell = list;
     cell_map *new_cell = (cell_map *)malloc(sizeof(cell_map));
@@ -65,7 +68,7 @@ linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map
     //particular case : indice = 0
     if (indice == 0){
         free(new_cell);
-        return cons(p_map, list);
+        return cons(p_map, list, direction, depth, p_mother);
     }
     else{
         for (int ind = 0; ind < indice; ind++){
@@ -77,6 +80,9 @@ linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map
 
         new_cell->p_map = p_map;
         new_cell->p_next = current_cell;
+        new_cell->depth = depth;
+        new_cell->direction = direction;
+        new_cell->p_mother = p_mother;
         old_cell->p_next = new_cell;
 
         return list;
@@ -90,7 +96,6 @@ linked_list_map remove_element(linked_list_map list, int indice){
 
     //particular case : indice = 0
     if (indice == 0){
-        (list->p_next)->p_previous = NULL;
         return list->p_next;
     }
     else{

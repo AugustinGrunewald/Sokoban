@@ -11,7 +11,7 @@ typedef cell_map *linked_list_map;
 struct cell_map {
     game_map *p_map;
     cell_map *p_next;
-    cell_map *p_previous;
+    cell_map *p_mother;
     char direction;
     int depth;
 };
@@ -31,9 +31,15 @@ linked_list_map nil();
  * 
  * @param list the list in which you add the new element.
  * 
+ * @param direction the character giving the direction used to create the new map (N,S,E,W).
+ * 
+ * @param depth giving the depth of the cell in the tree.
+ * 
+ * @param p_mother a pointer to the mother cell of the new one.
+ * 
  * @return linked_list_map the new linked list with the game map as new first cell. 
  */
-linked_list_map cons(game_map *p_map, linked_list_map list);
+linked_list_map cons(game_map *p_map, linked_list_map list, char direction, int depth, cell_map *p_mother);
 
 
 /**
@@ -86,9 +92,15 @@ game_map *get_element(linked_list_map list, int indice);
  *  
  * @param p_map the game map you want to insert.
  * 
+ * @param direction the character giving the direction used to create the new map (N,S,E,W).
+ * 
+ * @param depth giving the depth of the cell in the tree.
+ * 
+ * @param p_mother a pointer to the mother cell of the new one.
+ * 
  * @return linked_list_map the new list with the insertion of a new cell containing all the given informations.
  */
-linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map);
+linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map, char direction, int depth, cell_map *p_mother);
 
 
 /**
