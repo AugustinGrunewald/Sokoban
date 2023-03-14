@@ -104,8 +104,8 @@ linked_list_map remove_element(linked_list_map list, int indice){
         }
 
         copy_cell = current_cell;
-        (current_cell->p_next)->p_previous = old_cell;
         current_cell = current_cell->p_next;
+        // current_cell->p_previous = old_cell;
         old_cell->p_next = current_cell;
         free(copy_cell);
         

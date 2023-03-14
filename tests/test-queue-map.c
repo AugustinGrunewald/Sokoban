@@ -13,3 +13,7 @@
 #include "sokoban.h"
 #include "linked_list_map.h"
 #include "queue_map.h"
+
+int main(void){
+    return 0;
+}
