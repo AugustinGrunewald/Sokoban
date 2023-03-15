@@ -8,6 +8,10 @@
 typedef struct cell_map  cell_map;
 typedef cell_map *linked_list_map;
 
+/**
+ * @brief the structure used to build the linked list.
+ * 
+ */
 struct cell_map {
     game_map *p_map;
     cell_map *p_next;

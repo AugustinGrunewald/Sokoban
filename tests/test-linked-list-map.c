@@ -30,7 +30,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     
     //creating a linked list with five maps 
     printf("  |  Creating a list of five maps ... \n");
-    list = cons(loaded_map_1, cons(loaded_map_2, cons(loaded_map_3, cons(loaded_map_4, cons(loaded_map_5, nil(),'N',0,NULL),'N',0,NULL),'N',0,NULL),'N',0,NULL),'N',0,NULL);
+    list = cons(loaded_map_1, cons(loaded_map_2, cons(loaded_map_3, cons(loaded_map_4, cons(loaded_map_5, nil())))));
 
     //checking if the element at the right place are
     printf("  |  Checking if the different maps are at the right place ... \n");
@@ -63,7 +63,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     bool test_result_remove_1 = comparaison_two_maps(*loaded_map_2, *get_element(list_1, 0));
     assert(test_result_remove_1 == true);
     printf("  | |  Remove map 1 ... Success \n");
-    list_1 = insert_element(list_1, 0, loaded_map_1,'N',0,NULL);
+    list_1 = insert_element(list_1, 0, loaded_map_1);
     bool test_result_insert_1 = comparaison_two_maps(*loaded_map_1, *get_element(list_1, 0));
     assert(test_result_insert_1 == true);
     free(list_1);
@@ -73,7 +73,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     bool test_result_remove_2 = comparaison_two_maps(*loaded_map_4, *get_element(list_2, 2));
     assert(test_result_remove_2 == true);    
     printf("  | |  Remove map 3 ... Success \n");
-    list_2 = insert_element(list_2, 2, loaded_map_2,'N',0,NULL);
+    list_2 = insert_element(list_2, 2, loaded_map_2);
     bool test_result_insert_2 = comparaison_two_maps(*loaded_map_3, *get_element(list_2, 2));
     assert(test_result_insert_2 == true);
     printf("  | |  Insert map 3 ... Success \n");
@@ -82,7 +82,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     bool test_result_remove_3 = comparaison_two_maps(*loaded_map_4, *get_element(list_3, 3));
     assert(test_result_remove_3 == true);
     printf("  | |  Remove map 5 ... Success \n");
-    list_3 = insert_element(list_3, 4, loaded_map_5,'N',0,NULL);
+    list_3 = insert_element(list_3, 4, loaded_map_5);
     bool test_result_insert_3 = comparaison_two_maps(*loaded_map_5, *get_element(list_3, 4));
     assert(test_result_insert_3 == true);
     printf("  | |  Insert map 5 ... Success \n");
