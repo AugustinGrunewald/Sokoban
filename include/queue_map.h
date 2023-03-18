@@ -85,12 +85,10 @@ queue_map cons_queue(game_map *p_map, queue_map queue, char direction, int depth
 
 /**
  * @brief Enqueue a game map at the tail of the queue. 
- * 
- * @param first_last_pointers the structure giving two pointers to the first and last cell.
+ *  
+ * @param queue_tool the structure containing the queue and the first last pointers. 
  * 
  * @param p_map the map you want to enqueue.
- * 
- * @param queue the queue in which you enqueue the new map.
  * 
  * @param direction the direction used to get to the new map (N,S,E,W).
  * 
@@ -98,9 +96,9 @@ queue_map cons_queue(game_map *p_map, queue_map queue, char direction, int depth
  * 
  * @param p_mother a pointer to the mother cell of the new one.
  * 
- * @return enqueuing_tool the structure giving the new queue and the two pointers to the first and last cell.  
+ * @return *enqueuing_tool a pointer to the structure giving the new queue and the two pointers to the first and last cell.  
  */
-enqueuing_tool enqueue(first_last_pointers *first_last_pointers, game_map *p_map, queue_map queue, char direction, int depth, cell_map *p_mother);
+enqueuing_tool *enqueue(enqueuing_tool *queue_tool, game_map *p_map, char direction, int depth, cell_map *p_mother);
 
 
 /**

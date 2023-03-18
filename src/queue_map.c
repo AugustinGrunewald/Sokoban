@@ -22,8 +22,7 @@ queue_map cons_queue(game_map *p_map, queue_map queue, char direction, int depth
     return p_new_queue;
 }
 
-enqueuing_tool enqueue(first_last_pointers *first_last_pointers, game_map *p_map, queue_map queue, char direction, int depth, cell_map *p_mother){
-    enqueuing_tool enqueuing_tool;
+enqueuing_tool *enqueue(enqueuing_tool *queue_tool, game_map *p_map, char direction, int depth, cell_map *p_mother){
     cell_map *p_new_cell = (cell_map *) malloc(sizeof(cell_map));
 
     // filling the new cell with the needed informations and linking the pointers
@@ -31,15 +30,11 @@ enqueuing_tool enqueue(first_last_pointers *first_last_pointers, game_map *p_map
     p_new_cell->direction = direction;
     p_new_cell->p_mother = p_mother;
     p_new_cell->p_map = p_map;
-    *(first_last_pointers->p_last)->p_next = *p_new_cell;
 
-    first_last_pointers->p_last = p_new_cell;
+    queue_tool->first_last_pointers->p_last->p_next = p_new_cell;
+    queue_tool->first_last_pointers->p_last = p_new_cell;
 
-    //fillinf the enqueuing tool
-    enqueuing_tool.first_last_pointers = first_last_pointers;
-    enqueuing_tool.queue = queue;
-
-    return enqueuing_tool;
+    return queue_tool;
 }
 
 dequeuing_tool dequeue(first_last_pointers *first_last_pointers, queue_map queue){
