@@ -35,25 +35,13 @@ struct first_last_pointers {
     cell_map *p_last;
 };
 
-
 /**
- * @brief the structure returned by the enqueue function to get the new queue and the pointers to the first and last cell.
- * 
- */
-struct enqueuing_tool {
-    queue_map queue;
-    first_last_pointers *first_last_pointers;
-};
-
-
-/**
- * @brief the structure returned by the dequeue function to get the removed map, the updated queue and the pointers to the first and last cell.
+ * @brief the structure returned by the dequeue function to get the removed cell map, the updated queue and the pointers to the first and last cell.
  * 
  */
 struct dequeuing_tool {
     queue_map queue;
-    game_map *p_map;
-    first_last_pointers *first_last_pointers;
+    cell_map *p_map;
 };
 
 
@@ -66,51 +54,35 @@ queue_map nil_queue();
 
 
 /**
- * @brief Adding a game map to the queue.
+ * @brief trying a new version of the enqueue function that should be simplier
+ *
+ * @param queue the queue used in the function.
  * 
- * @param element an element to add to the queue.
- * 
- * @param queue the queue in which you add the new element.
- * 
- * @param direction the character giving the direction used to create the new map (N,S,E,W).
- * 
- * @param depth giving the depth of the cell in the tree.
- * 
- * @param p_mother a pointer to the mother cell of the new one.
- * 
- * @return queue_map the new queue with the game map as new first cell. 
- */
-queue_map cons_queue(game_map *p_map, queue_map queue, char direction, int depth, cell_map *p_mother);
-
-
-/**
- * @brief Enqueue a game map at the tail of the queue. 
- *  
- * @param queue_tool the structure containing the queue and the first last pointers. 
+ * @param p_first_last_pointers a pointer to the first last pointers structure used for the queue
  * 
  * @param p_map the map you want to enqueue.
  * 
- * @param direction the direction used to get to the new map (N,S,E,W).
+ * @param direction the direction used to get the new map (N,S,E,W).
  * 
- * @param depth the depth of this new map in the tree. 
+ * @param depth the depth at which youplace the new map.
  * 
  * @param p_mother a pointer to the mother cell of the new one.
  * 
- * @return *enqueuing_tool a pointer to the structure giving the new queue and the two pointers to the first and last cell.  
+ * @return the queue with the new map that has been enqueue.
  */
-enqueuing_tool *enqueue(enqueuing_tool *queue_tool, game_map *p_map, char direction, int depth, cell_map *p_mother);
+queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointers, game_map *p_map, char direction, int depth, cell_map *p_mother);
 
 
 /**
  * @brief Dequeue a game map a the head of the queue.
  * 
- * @param first_last_pointers the structure giving two pointers to the first and last cell.
- * 
  * @param queue the queue in which you want to dequeue the map.
  * 
- * @return dequeuing_tool the structure giving the removed game map, the updated queue and the two pointers to the first and last cell. 
+ * @param first_last_pointers the structure giving two pointers to the first and last cell.
+ * 
+ * @return dequeuing_tool the structure giving the removed cell map, the updated queue and the two pointers to the first and last cell. 
  */
-dequeuing_tool dequeue(first_last_pointers *first_last_pointers, queue_map queue);
+dequeuing_tool dequeue_bis(queue_map queue, first_last_pointers *p_first_last_pointers);
 
 
 /**
@@ -152,38 +124,6 @@ void print_queue(queue_map queue);
  * @return game_map* the wanted game map in the queue.
  */
 game_map *get_element_queue(queue_map queue, int indice);
-
-
-/**
- * @brief Insert a certain game map at a certain indice in the queue.
- * 
- * @param queue the queue you use.
- * 
- * @param indice the indice at which you want to insert the game map.
- *  
- * @param p_map the game map you want to insert.
- * 
- * @param direction the character giving the direction used to create the new map (N,S,E,W).
- * 
- * @param depth giving the depth of the cell in the tree.
- * 
- * @param p_mother a pointer to the mother cell of the new one.
- * 
- * @return queue_map the new queue with the insertion of a new cell containing all the given informations.
- */
-queue_map insert_element_queue(queue_map queue, int indice, game_map *p_map, char direction, int depth, cell_map *p_mother);
-
-
-/**
- * @brief Remove the cell of a certain indice in the queue.
- * 
- * @param queue the queue you use.
- * 
- * @param indice the indice of the cell you want to remove.
- * 
- * @return queue_map the new list without the cell you wanted. 
- */
-queue_map remove_element_queue(queue_map queue, int indice);
 
 
 /**
