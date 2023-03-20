@@ -51,6 +51,7 @@ stats *solver(game_map *initial_map){
 
     while (is_empty_queue(search_queue) == false){
         dequeue_result = dequeue_bis(search_queue, p_first_last_pointers);
+        search_queue = dequeue_result.queue;
         p_current_cell = dequeue_result.p_map;
         //adding a security 
         if (p_current_cell != NULL){
@@ -81,31 +82,34 @@ stats *solver(game_map *initial_map){
         }
     }
 
-    // if (wining_test(*p_current_map) == true){
-    //     //building the winning plan
-    //     cell_map_queue *index = p_current_cell;
-    //     int length = plan_length(p_current_cell);
-    //     char plan[length];
+    if (wining_test(*p_current_map) == true){
+        //building the winning plan
+        cell_map_queue *index = p_current_cell;
+        int length = plan_length(p_current_cell);
+        char plan_bis[length];
 
-    //     for (int i = 0; i < length; i++){
-    //         plan[length - i - 1] = index->direction;
-    //         index = index->p_mother;
-    //     }
+        for (int i = 0; i < length; i++){
+            plan_bis[length - i - 1] = index->direction;
+            index = index->p_mother;
+        }
+        //copying the plan without the first usefull character
+        char plan[length - 1];
+        for (int i = 0; i < length - 1; i++){
+            plan[i] = plan_bis[i+1];
+        }
 
-    //     //filling the result structure
-    //     result->solution_plan = plan;
-    //     result->win = true;
+        //filling the result structure
+        result->solution_plan = plan;
+        result->win = true;
 
-    //     return result;
-    // }
-    // else{
-    //     result->solution_plan = NULL;
-    //     result->win = false;
+        return result;
+    }
+    else{
+        result->solution_plan = NULL;
+        result->win = false;
 
-    //     return result;
-    // }
-    result->solution_plan = NULL;
-    result->win = false;
+        return result;
+    }
 
     return result;
 }

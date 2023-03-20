@@ -17,31 +17,39 @@
 #include "sokoban.h"
 #include "loader.h"
 
-int main(void){
-    printf("* Starting solver tests...\n");
-
-    const char adress[] = "./data/soko_dumb_1.in";
-
-    //loading a map
+void building_solution(const char *adress){
+    //loading the map
     game_map *loaded_map = map_loader(adress);
-    stats *result;
 
     //testing the solver
-    printf("  |  Testing ./data/soko_dumb_1.in ... \n");
+    printf("  |  Testing %s ... \n", adress);
+    stats *result;
     result = solver(loaded_map);
 
     if (result->win == true){
         printf("  | |  WIN \n");
+        printf("  | |  Wining plan: %s \n", result->solution_plan);
     }else{
         printf("  | |  LOOSE \n");
     }
 
-    printf("  +-> OK!\n");
-    printf("\n");
-
     //freeing the loaded maps and all the related stuff
     free(loaded_map->map);
     free(loaded_map);
+    free(result);
+}
+
+
+int main(void){
+    printf("* Starting solver tests...\n");
+
+    building_solution("./data/soko_dumb.in");
+    building_solution("./data/soko_dumb_1.in");
+    building_solution("./data/soko_dumb_2.in");
+    building_solution("./data/soko_dumb_3.in");
+
+    printf("  +-> OK!\n");
+    printf("\n");
 
     return 0;
 }
