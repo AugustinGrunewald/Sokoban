@@ -1,0 +1,138 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#include "solver.h"
+#include "queue_map.h"
+#include "linked_list_map.h"
+#include "sokoban.h"
+#include "loader.h"
+
+bool wining_test(game_map map){
+    bool result = false;
+    int length_map = map.map_size.height * map.map_size.width;
+    char *map_string = map.map;
+    for (int ind = 0; ind < length_map; ind++){
+        //searching if there is still a box on an empty space (which means it's not a wining map)
+        if (map_string[ind] == '$'){
+            return result;
+        }
+    }
+    //if we get out of the loop, it means the map is a wining one
+    result = true;
+
+    return result;
+}
+
+stats *solver(game_map *initial_map){
+    //initializing the result structure
+    stats *result = (stats*)malloc(sizeof(stats));
+    
+    //for the solver the algorithm presented in the project pdf is used (see page 4)
+
+    queue_map search_queue = nil_queue();
+    queue_map dequeued_queue = nil_queue();
+    linked_list_map explored_list = nil();
+
+    //initializing the first last pointers used in the queue (creating two of them because two queue are used)
+    first_last_pointers *p_first_last_pointers = (first_last_pointers *)malloc(sizeof(first_last_pointers));
+    p_first_last_pointers->p_first = NULL;
+    p_first_last_pointers->p_last = NULL;
+    first_last_pointers *p_first_last_pointers_bis = (first_last_pointers *)malloc(sizeof(first_last_pointers));
+    p_first_last_pointers_bis->p_first = NULL;
+    p_first_last_pointers_bis->p_last = NULL;
+
+    //starting the algorithm
+    search_queue = enqueue_bis(search_queue, p_first_last_pointers, initial_map, '.', 0, NULL);
+    explored_list = cons(initial_map, explored_list);
+    cell_map_queue *p_current_cell;
+    game_map *p_current_map;
+    dequeuing_tool dequeue_result;
+
+    while (is_empty_queue(search_queue) == false){
+        dequeue_result = dequeue_bis(search_queue, p_first_last_pointers);
+        p_current_cell = dequeue_result.p_map;
+        //adding a security 
+        if (p_current_cell != NULL){
+            p_current_map = p_current_cell->p_map;
+        }else{
+            p_current_map = NULL;
+        }
+        
+        dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->depth, p_current_cell->p_mother);
+
+        if (wining_test(*p_current_map) == true){
+            break;
+        }
+
+        char available_direction[] = "NSEW";
+        for (int i = 0; i < 4; i++){
+            char direction = available_direction[i];
+
+            game_map *p_new_map = move(p_current_map, direction);
+
+            if (searching_linked_list(p_new_map, explored_list) == true){
+                free(p_new_map->map);
+                free(p_new_map);
+            }else{
+                explored_list = cons(p_new_map, explored_list);
+                search_queue = enqueue_bis(search_queue, p_first_last_pointers,p_new_map, direction, p_current_cell->depth + 1, p_current_cell);
+            }
+        }
+    }
+
+    // if (wining_test(*p_current_map) == true){
+    //     //building the winning plan
+    //     cell_map_queue *index = p_current_cell;
+    //     int length = plan_length(p_current_cell);
+    //     char plan[length];
+
+    //     for (int i = 0; i < length; i++){
+    //         plan[length - i - 1] = index->direction;
+    //         index = index->p_mother;
+    //     }
+
+    //     //filling the result structure
+    //     result->solution_plan = plan;
+    //     result->win = true;
+
+    //     return result;
+    // }
+    // else{
+    //     result->solution_plan = NULL;
+    //     result->win = false;
+
+    //     return result;
+    // }
+    result->solution_plan = NULL;
+    result->win = false;
+
+    return result;
+}
+
+bool searching_linked_list(game_map *p_map, linked_list_map list){
+    bool result = false;
+    cell_map *index = list;
+
+    while (index != NULL) {
+        if (comparaison_two_maps(*(index->p_map), *p_map) == true){
+            result = true;
+            return result;
+        }
+        index = index->p_next; 
+    }
+
+    return result;
+}
+
+int plan_length(queue_map queue){
+    int size = 0;
+    cell_map_queue *index = queue;
+
+    while (index != NULL) {
+        index = index->p_mother; 
+        size++;
+    }
+
+    return size;
+}

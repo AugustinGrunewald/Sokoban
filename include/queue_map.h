@@ -1,26 +1,26 @@
-#ifndef LINKED_LIST_MAP_H
-#define LINKED_LIST_MAP_H
+#ifndef QUEUE_MAP_H
+#define QUEUE_MAP_H
 
 #include <stdbool.h>
 #include "sokoban.h"
 #include "loader.h"
 
 
-typedef struct cell_map  cell_map;
+typedef struct cell_map_queue  cell_map_queue;
 typedef struct first_last_pointers first_last_pointers;
 typedef struct enqueuing_tool enqueuing_tool;
 typedef struct dequeuing_tool dequeuing_tool;
-typedef cell_map *queue_map;
+typedef cell_map_queue *queue_map;
 
 
 /**
  * @brief the structure used to build the queue.
  * 
  */
-struct cell_map {
+struct cell_map_queue {
     game_map *p_map;
-    cell_map *p_next;
-    cell_map *p_mother;
+    cell_map_queue *p_next;
+    cell_map_queue *p_mother;
     char direction;
     int depth;
 };
@@ -31,8 +31,8 @@ struct cell_map {
  * 
  */
 struct first_last_pointers {
-    cell_map *p_first;
-    cell_map *p_last;
+    cell_map_queue *p_first;
+    cell_map_queue *p_last;
 };
 
 /**
@@ -41,7 +41,7 @@ struct first_last_pointers {
  */
 struct dequeuing_tool {
     queue_map queue;
-    cell_map *p_map;
+    cell_map_queue *p_map;
 };
 
 
@@ -70,7 +70,7 @@ queue_map nil_queue();
  * 
  * @return the queue with the new map that has been enqueue.
  */
-queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointers, game_map *p_map, char direction, int depth, cell_map *p_mother);
+queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointers, game_map *p_map, char direction, int depth, cell_map_queue *p_mother);
 
 
 /**

@@ -11,8 +11,8 @@ queue_map nil_queue(){
     return NULL;
 }
 
-queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointers, game_map *p_map, char direction, int depth, cell_map *p_mother){
-    cell_map *p_new_cell = (cell_map*)malloc(sizeof(cell_map));
+queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointers, game_map *p_map, char direction, int depth, cell_map_queue *p_mother){
+    cell_map_queue *p_new_cell = (cell_map_queue*)malloc(sizeof(cell_map_queue));
 
     //filling the new cell with the given data
     p_new_cell->depth = depth;
@@ -61,7 +61,7 @@ dequeuing_tool dequeue_bis(queue_map queue, first_last_pointers *p_first_last_po
 
 int size_queue(queue_map queue){
     int size = 0;
-    cell_map *index = queue;
+    cell_map_queue *index = queue;
 
     while (index != NULL) {
         index = index->p_next; 
@@ -80,7 +80,7 @@ bool is_empty_queue(queue_map queue){
 }
 
 void print_queue(queue_map queue){
-    cell_map *index = queue;
+    cell_map_queue *index = queue;
 
     while (index != NULL){
         print_map(*(index->p_map));
@@ -89,7 +89,7 @@ void print_queue(queue_map queue){
 }
 
 game_map *get_element_queue(queue_map queue, int indice){
-    cell_map *current_cell = queue;
+    cell_map_queue *current_cell = queue;
 
     for (int ind = 0; ind < indice; ind++){
         current_cell = current_cell->p_next;

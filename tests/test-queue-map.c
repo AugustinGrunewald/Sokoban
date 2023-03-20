@@ -130,9 +130,11 @@ void building_testing_queue_map(const char *adress_1, const char *adress_2, cons
     printf("  | |  Map 5 ... Success \n");
 
     free(dequeuing_result.p_map);
-     
 
-    // freeing the loaded maps
+
+    // freeing the loaded maps and the first last pointers
+    free(p_first_last_pointers);
+
     free(loaded_map_1->map);
     free(loaded_map_1);
     free(loaded_map_2->map);
