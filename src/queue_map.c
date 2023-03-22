@@ -100,6 +100,16 @@ game_map *get_element_queue(queue_map queue, int indice){
 void deallocate_queue(queue_map queue){
     if (is_empty_queue(queue) == false){
         deallocate_queue(queue->p_next);
+        free(queue->p_map);
+        free(queue);
+    }    
+}
+
+void deallocate_queue_solver(queue_map queue){
+    if (is_empty_queue(queue) == false){
+        deallocate_queue_solver(queue->p_next);
+        free(queue->p_map->map);
+        // free(queue->p_map);
         free(queue);
     }    
 }

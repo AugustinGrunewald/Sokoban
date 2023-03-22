@@ -133,4 +133,12 @@ game_map *get_element_queue(queue_map queue, int indice);
  */
 void deallocate_queue(queue_map queue);
 
+
+/**
+ * @brief Function that should free all the queue used in the solver.
+ * 
+ * @param queue 
+ */
+void deallocate_queue_solver(queue_map queue);
+
 #endif

@@ -45,14 +45,16 @@ stats *solver(game_map *initial_map){
     //starting the algorithm
     search_queue = enqueue_bis(search_queue, p_first_last_pointers, initial_map, '.', 0, NULL);
     explored_list = cons(initial_map, explored_list);
-    cell_map_queue *p_current_cell;
-    game_map *p_current_map;
     dequeuing_tool dequeue_result;
 
     while (is_empty_queue(search_queue) == false){
+        game_map *p_current_map;
+        cell_map_queue *p_current_cell;
+
         dequeue_result = dequeue_bis(search_queue, p_first_last_pointers);
         search_queue = dequeue_result.queue;
         p_current_cell = dequeue_result.p_map;
+
         //adding a security 
         if (p_current_cell != NULL){
             p_current_map = p_current_cell->p_map;
@@ -80,12 +82,16 @@ stats *solver(game_map *initial_map){
                 search_queue = enqueue_bis(search_queue, p_first_last_pointers,p_new_map, direction, p_current_cell->depth + 1, p_current_cell);
             }
         }
+        // free(p_current_cell);
     }
 
-    if (wining_test(*p_current_map) == true){
+    cell_map_queue *p_current_cell_bis = p_first_last_pointers_bis->p_last;
+    game_map *p_current_map_bis = p_current_cell_bis->p_map;
+
+    if (wining_test(*p_current_map_bis) == true){
         //building the winning plan
-        cell_map_queue *index = p_current_cell;
-        int length = plan_length(p_current_cell);
+        cell_map_queue *index = p_current_cell_bis;
+        int length = plan_length(p_current_cell_bis);
         char plan_bis[length];
 
         for (int i = 0; i < length; i++){
@@ -102,16 +108,27 @@ stats *solver(game_map *initial_map){
         result->solution_plan = plan;
         result->win = true;
 
+        deallocate_queue_solver(search_queue);
+        deallocate_queue_solver(dequeued_queue);
+        deallocate_list_solver(explored_list);
+
+        free(p_first_last_pointers);
+        free(p_first_last_pointers_bis);
+
         return result;
-    }
-    else{
+    }else{
         result->solution_plan = NULL;
         result->win = false;
 
+        deallocate_queue_solver(search_queue);
+        deallocate_queue_solver(dequeued_queue);
+        deallocate_list_solver(explored_list);
+
+        free(p_first_last_pointers);
+        free(p_first_last_pointers_bis);
+
         return result;
     }
-
-    return result;
 }
 
 bool searching_linked_list(game_map *p_map, linked_list_map list){

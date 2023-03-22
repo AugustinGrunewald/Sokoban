@@ -111,4 +111,12 @@ linked_list_map remove_element(linked_list_map list_remove_element, int indice);
  */
 void deallocate_list(linked_list_map list);
 
+
+/**
+ * @brief Function that should free all the linked list used in the solver.
+ * 
+ * @param list 
+ */
+void deallocate_list_solver(linked_list_map list);
+
 #endif
