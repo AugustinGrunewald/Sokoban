@@ -119,7 +119,7 @@ void deallocate_list(linked_list_map list){
 void deallocate_list_solver(linked_list_map list){
     if (is_empty(list) == false){
         deallocate_list(list->p_next);
-        free(list->p_map);
+        // free(list->p_map);
         free(list);
     }    
 }

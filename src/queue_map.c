@@ -109,7 +109,7 @@ void deallocate_queue_solver(queue_map queue){
     if (is_empty_queue(queue) == false){
         deallocate_queue_solver(queue->p_next);
         free(queue->p_map->map);
-        // free(queue->p_map);
+        free(queue->p_map);
         free(queue);
     }    
 }

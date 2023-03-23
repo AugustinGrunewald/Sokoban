@@ -28,14 +28,18 @@ void building_solution(const char *adress){
 
     if (result->win == true){
         printf("  | |  WIN \n");
-        printf("  | |  Wining plan: ");
-        for(int i = 0; i < sizeof(plan); i++){
-            printf("%c", plan[i]);
-        }
-        printf("\n");
+        printf("  | |  Wining plan: %s", plan);
+        // for(int i = 0; i < sizeof(plan); i++){
+        //     printf("%c", plan[i]);
+        // }
+        // printf("\n");
+        printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
+        printf("  | |  Time spent by the solver: %f \n", result->time_spent);
         printf("\n");
     }else{
         printf("  | |  LOOSE \n");
+        printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
+        printf("  | |  Time spent by the solver: %f \n", result->time_spent);
         printf("\n");
     }
 
@@ -51,9 +55,17 @@ int main(void){
 
     printf("  |  Testing ./data/soko_dumb.in ... \n");
     building_solution("./data/soko_dumb.in");
-    // building_solution("./data/soko_dumb_1.in");
+
+    // printf("  |  Testing ./data/soko_dumb_1.in ... \n");
+    // building_solution("./data/soko_dumb_1.in");  
+
+    // printf("  |  Testing ./data/soko_dumb_2.in ... \n");
     // building_solution("./data/soko_dumb_2.in");
+
+    // printf("  |  Testing ./data/soko_dumb_3.in ... \n");
     // building_solution("./data/soko_dumb_3.in");
+
+    // printf("  |  Testing ./data/soko1_1.in ... \n");
     // building_solution("./data/soko1_1.in");
 
     printf("  +-> OK!\n");

@@ -295,3 +295,18 @@ game_map *replay(game_map *loaded_map, int length_direction_string, char *direct
     return current_step_map;
 }
 
+bool wining_test_play(game_map map){
+    bool result = false;
+    int length_map = map.map_size.height * map.map_size.width;
+    char *map_string = map.map;
+    for (int ind = 0; ind < length_map; ind++){
+        //searching if there is still a box on an empty space (which means it's not a wining map)
+        if (map_string[ind] == '$'){
+            return result;
+        }
+    }
+    //if we get out of the loop, it means the map is a wining one
+    result = true;
+
+    return result;
+}

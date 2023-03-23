@@ -54,7 +54,7 @@ test-solver: test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solv
 replay: replay.o loader.o sokoban.o
 	$(CC) $(CFLAGS) -o replay replay.o loader.o sokoban.o
 
-play: play.o loader.o sokoban.o gui.o
+play: play.o loader.o sokoban.o gui.o 
 	$(CC) $(CFLAGS) -o play play.o loader.o sokoban.o gui.o $(LDFLAGS)
 
 

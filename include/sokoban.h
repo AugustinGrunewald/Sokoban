@@ -145,4 +145,16 @@ bool comparaison_two_adresses(const char *adress_1, const char *adress_2);
 game_map *replay(game_map *loaded_map, int length_direction_string, char *direction_string);
 
 
+/**
+ * 
+ * @brief Function testing if the given map is a wining solution.
+ * 
+ * @param map the given map.
+ * 
+ * @return true if the map is a wining one.
+ * @return false if the map isn't a wining one.
+ */
+bool wining_test_play(game_map map);
+
+
 #endif

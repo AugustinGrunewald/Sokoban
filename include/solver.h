@@ -15,6 +15,12 @@ struct stats{
 
     /** A string representing the solution plan.*/
     char *solution_plan;
+
+    /** An int giving the number of explored nodes.*/
+    int nmb_explored_nodes;
+
+    /** A double representing the time of used by the solver */
+    double time_spent;
 };
 
 

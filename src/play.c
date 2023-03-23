@@ -45,13 +45,21 @@ int main(int argc, char *argv[]) {
 
     // main loop
     while(true) {
-
         switch (GUI_get_key()) {
         case SDLK_UP:
             
             next_step_map = move(current_step_map, available_direction[0]);
             level = next_step_map->map;
             GUI_show(width, height, level);
+            
+            *current_step_map = *next_step_map;
+
+            if (wining_test_play(*current_step_map) == true){
+                printf("\n");
+                printf("YOU WIN !!! CONGRATULATIONS :) \n");
+                printf("\n");
+                stop = true;
+            }
 
             break;
 
@@ -62,6 +70,14 @@ int main(int argc, char *argv[]) {
             GUI_show(width, height, level);
 
             *current_step_map = *next_step_map;
+
+            if (wining_test_play(*current_step_map) == true){
+                printf("\n");
+                printf("YOU WIN !!! CONGRATULATIONS :) \n");
+                printf("\n");
+                stop = true;
+            }
+
             break;
 
         case SDLK_LEFT:
@@ -71,6 +87,14 @@ int main(int argc, char *argv[]) {
             GUI_show(width, height, level);
 
             *current_step_map = *next_step_map;
+
+            if (wining_test_play(*current_step_map) == true){
+                printf("\n");
+                printf("YOU WIN !!! CONGRATULATIONS :) \n");
+                printf("\n");
+                stop = true;
+            }
+
             break;
 
         case SDLK_RIGHT:
@@ -81,14 +105,28 @@ int main(int argc, char *argv[]) {
 
             
             *current_step_map = *next_step_map;
+
+            if (wining_test_play(*current_step_map) == true){
+                printf("\n");
+                printf("YOU WIN !!! CONGRATULATIONS :) \n");
+                printf("\n");
+                stop = true;
+            }
+            
             break;
 
         case 'q':
             stop = true;
+            printf("\n");
+            printf("SEE YOU SOON PLAYING SOKO AGAIN :) \n");
+            printf("\n");
             break;
 
         case -1:
             stop = true;
+            printf("\n");
+            printf("SEE YOU SOON PLAYING SOKO AGAIN :) \n");
+            printf("\n");
             break;
         }
 

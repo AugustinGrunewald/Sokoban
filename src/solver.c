@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include<time.h>
 
 #include "solver.h"
 #include "queue_map.h"
@@ -25,8 +26,11 @@ bool wining_test(game_map map){
 }
 
 stats *solver(game_map *initial_map){
-    //initializing the result structure
+    //initializing the result structure and launching the chronometer
+    double time_spent = 0.0;
+    clock_t begin = clock();
     stats *result = (stats*)malloc(sizeof(stats));
+    int nmb_explored_nodes = 1;
     
     //for the solver the algorithm presented in the project pdf is used (see page 4)
 
@@ -48,19 +52,19 @@ stats *solver(game_map *initial_map){
     dequeuing_tool dequeue_result;
 
     while (is_empty_queue(search_queue) == false){
+        //increasing the counter of nodes
+        nmb_explored_nodes ++;
+
+        //declaring the used structures
         game_map *p_current_map;
         cell_map_queue *p_current_cell;
 
         dequeue_result = dequeue_bis(search_queue, p_first_last_pointers);
         search_queue = dequeue_result.queue;
-        p_current_cell = dequeue_result.p_map;
 
-        //adding a security 
-        if (p_current_cell != NULL){
-            p_current_map = p_current_cell->p_map;
-        }else{
-            p_current_map = NULL;
-        }
+        p_current_cell = dequeue_result.p_map;
+        p_current_map = p_current_cell->p_map;
+
         
         dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->depth, p_current_cell->p_mother);
 
@@ -82,7 +86,8 @@ stats *solver(game_map *initial_map){
                 search_queue = enqueue_bis(search_queue, p_first_last_pointers,p_new_map, direction, p_current_cell->depth + 1, p_current_cell);
             }
         }
-        // free(p_current_cell);
+        free(p_current_cell);
+        printf("ugefgvu\n");
     }
 
     cell_map_queue *p_current_cell_bis = p_first_last_pointers_bis->p_last;
@@ -107,25 +112,41 @@ stats *solver(game_map *initial_map){
         //filling the result structure
         result->solution_plan = plan;
         result->win = true;
+        result->nmb_explored_nodes = nmb_explored_nodes;
 
+
+        //freeing the memory
         deallocate_queue_solver(search_queue);
         deallocate_queue_solver(dequeued_queue);
         deallocate_list_solver(explored_list);
 
         free(p_first_last_pointers);
         free(p_first_last_pointers_bis);
+
+        //finishing the chronometer, translating the result into seconds and adding it in the result structure
+        clock_t end = clock();
+        time_spent += (double)(end - begin)/CLOCKS_PER_SEC;
+        result->time_spent = time_spent;
 
         return result;
     }else{
         result->solution_plan = NULL;
         result->win = false;
+        result->nmb_explored_nodes = nmb_explored_nodes;
 
+
+        //freeing the memory
         deallocate_queue_solver(search_queue);
         deallocate_queue_solver(dequeued_queue);
         deallocate_list_solver(explored_list);
 
         free(p_first_last_pointers);
         free(p_first_last_pointers_bis);
+
+        //finishing the chronometer, translating the result into seconds and adding it in the result structure
+        clock_t end = clock();
+        time_spent += (double)(end - begin)/CLOCKS_PER_SEC;
+        result->time_spent = time_spent;
 
         return result;
     }
