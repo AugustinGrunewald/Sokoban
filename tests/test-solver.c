@@ -36,6 +36,8 @@ void building_solution(const char *adress){
         printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
         printf("  | |  Time spent by the solver: %f \n", result->time_spent);
         printf("\n");
+
+        replay_solver(loaded_map, result->plan_length, result->solution_plan);
     }else{
         printf("  | |  LOOSE \n");
         printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
@@ -43,9 +45,7 @@ void building_solution(const char *adress){
         printf("\n");
     }
 
-    //freeing the loaded maps and all the related stuff
-    // free(loaded_map->map);
-    // free(loaded_map);
+    //freeing the result structure
     free(result);
 }
 

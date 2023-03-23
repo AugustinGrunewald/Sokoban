@@ -16,6 +16,9 @@ struct stats{
     /** A string representing the solution plan.*/
     char *solution_plan;
 
+    /** An int representing the length of the plan. */
+    int plan_length;
+
     /** An int giving the number of explored nodes.*/
     int nmb_explored_nodes;
 
@@ -70,5 +73,18 @@ bool searching_linked_list(game_map *p_map, linked_list_map list);
  * @return an int representing the size researched.
  */
 int plan_length(queue_map queue);
+
+
+/**
+ * @brief Given movements actions, it should execute all the movements and print it.
+ * 
+ * @param loaded_map A pointer to the structure representing the initial map.
+ * 
+ * @param length_direction_string An int representing the number of movements you want to execute in the plan.
+ * 
+ * @param direction_string A string representing the plan.
+ *  
+ */
+void replay_solver(game_map *loaded_map, int length_direction_string, char *direction_string);
 
 #endif

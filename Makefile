@@ -47,8 +47,8 @@ test-linked-list-map: test-linked-list-map.o loader.o sokoban.o linked_list_map.
 test-queue-map: test-queue-map.o loader.o sokoban.o linked_list_map.o queue_map.o
 	$(CC) $(CFLAGS) -o test-queue-map test-queue-map.o loader.o sokoban.o linked_list_map.o queue_map.o
 
-test-solver: test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o
-	$(CC) $(CFLAGS) -o test-solver test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o
+test-solver: test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o gui.o
+	$(CC) $(CFLAGS) -o test-solver test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o gui.o $(LDFLAGS)
 
 # all the rules to build the other applications
 replay: replay.o loader.o sokoban.o
@@ -64,7 +64,7 @@ compile-all: test-loader test-move test-replay replay play \
 	test-linked-list-map test-queue-map test-solver
 	 
 compile-all-macOS: test-loader test-move test-replay \
-	replay test-linked-list-map test-queue-map test-solver
+	replay test-linked-list-map test-queue-map 
 
 # add all your test executables in the following variable. You should respect
 # the order given in the project text
