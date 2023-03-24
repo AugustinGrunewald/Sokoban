@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
 #include <time.h>
-
-#include <SDL2/SDL.h>
 
 #include "gui.h"
 #include "solver.h"
@@ -90,7 +89,6 @@ stats *solver(game_map *initial_map){
             }
         }
         // free(p_current_cell);
-        // printf("ugefgvu\n");
     }
 
     cell_map_queue *p_current_cell_bis = p_first_last_pointers_bis->p_last;
@@ -101,15 +99,14 @@ stats *solver(game_map *initial_map){
         cell_map_queue *index = p_current_cell_bis;
         int length = plan_length(p_current_cell_bis);
         char plan_bis[length];
+        char plan[length - 1];
 
-        for (int i = 0; i < length; i++){
+        for (int i = 1; i < length; i++){
             plan_bis[length - i - 1] = index->direction;
             index = index->p_mother;
         }
-        //copying the plan without the first usefull character
-        char plan[length - 1];
-        for (int i = 0; i < length - 1; i++){
-            plan[i] = plan_bis[i+1];
+        for(int i = 0; i < length - 1; i++){
+            plan[i] = plan_bis[i];
         }
 
         //filling the result structure
@@ -182,46 +179,4 @@ int plan_length(queue_map queue){
     }
 
     return size;
-}
-
-void replay_solver(game_map *loaded_map, int length_direction_string, char *direction_string){
-    game_map *current_step_map = loaded_map;
-
-    int height = loaded_map->map_size.height;
-    int width = loaded_map->map_size.width;
-
-    // initialize GUI window
-    GUI_init("Sokoban", width, height);
-
-    printf("jwsefjgwsdfgwsf");
-
-    // display first map
-    GUI_show(width, height, current_step_map->map); 
-    
-    current_step_map = move(current_step_map, direction_string[0]);
-
-    //display map after first movement
-    GUI_show(width, height, current_step_map->map); 
-
-    for(int direction_step = 1; direction_step < length_direction_string; direction_step++){
-        char current_direction = direction_string[direction_step];
-
-        game_map *next_step_map = move(current_step_map, current_direction);
-
-        free(current_step_map->map);
-        free(current_step_map);
-
-        current_step_map = next_step_map;     
-
-        //display level
-        GUI_show(width, height, current_step_map->map); 
-    }
-
-    // closing the window
-    GUI_close();
-
-    printf("\n");
-    printf("THIS COMPUTER IS TOO STRONG ...\n");
-    printf("HE ALWAYS WIN :o \n");
-    printf("\n");
 }
