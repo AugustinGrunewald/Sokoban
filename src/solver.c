@@ -53,6 +53,7 @@ stats *solver(game_map *initial_map){
     explored_list = cons(initial_map, explored_list);
     dequeuing_tool dequeue_result;
 
+
     while (is_empty_queue(search_queue) == false){
         //increasing the counter of nodes
         nmb_explored_nodes ++;
@@ -63,18 +64,18 @@ stats *solver(game_map *initial_map){
 
         dequeue_result = dequeue_bis(search_queue, p_first_last_pointers);
         search_queue = dequeue_result.queue;
-
         p_current_cell = dequeue_result.p_map;
-        p_current_map = p_current_cell->p_map;
 
+        //simpler name use in the rest of the loop
+        p_current_map = p_current_cell->p_map;
         
         dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->depth, p_current_cell->p_mother);
 
         if (wining_test(*p_current_map) == true){
             break;
         }
-
         char available_direction[] = "NSEW";
+
         for (int i = 0; i < 4; i++){
             char direction = available_direction[i];
 
@@ -85,10 +86,9 @@ stats *solver(game_map *initial_map){
                 free(p_new_map);
             }else{
                 explored_list = cons(p_new_map, explored_list);
-                search_queue = enqueue_bis(search_queue, p_first_last_pointers,p_new_map, direction, p_current_cell->depth + 1, p_current_cell);
+                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_current_cell->depth + 1, p_current_cell);
             }
         }
-        // free(p_current_cell);
     }
 
     cell_map_queue *p_current_cell_bis = p_first_last_pointers_bis->p_last;

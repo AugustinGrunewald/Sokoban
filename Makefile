@@ -65,7 +65,7 @@ solve: solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o
 # put all your applications and tests executables as prerequisite of this rule
 # \ allows to go to the next line
 compile-all: test-loader test-move test-replay replay play solve \
-	test-linked-list-map test-queue-map test-solver test-bst-map
+	test-linked-list-map test-queue-map test-solver #test-bst-map
 	 
 compile-all-macOS: test-loader test-move test-replay \
 	replay test-linked-list-map test-queue-map test-bst-map
