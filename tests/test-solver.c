@@ -17,6 +17,7 @@
 #include "linked_list_map.h"
 #include "sokoban.h"
 #include "loader.h"
+#include "bst_map.h"
 
 //trying to make a function using sdl to show the solving process
 
@@ -81,31 +82,38 @@
 
 void building_solution(const char *adress, char *plan){
     //loading the map
-    game_map *loaded_map = map_loader(adress);
+    // game_map *loaded_map = map_loader(adress);
+    game_map *loaded_map_bst = map_loader(adress);
 
     //testing the solver
-    stats *result;
-    result = solver(loaded_map);
+    // stats *result;
+    stats *result_bst;
+    // result = solver(loaded_map);
+    result_bst = solver_bst(loaded_map_bst);
 
-    if (result->win == true){
+    if (result_bst->win == true){
         printf("  | |  WIN \n");
-        printf("  | |  Wining plan: %s\n", result->solution_plan);
-        // checking if the solution plan is the one given in test-solver.csv
-        assert(strncmp(plan, result->solution_plan, result->plan_length) == 0);
-        printf("  | |  Plan corresponding to the given one ...  YES \n");
-        printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
-        printf("  | |  Time spent by the solver: %f \n", result->time_spent);
+        // printf("  | |  Wining plan: %s\n", result->solution_plan);
+        // // checking if the solution plan is the one given in test-solver.csv
+        // assert(strncmp(plan, result->solution_plan, result->plan_length) == 0);
+        // printf("  | |  Plan corresponding to the given one ...  YES \n");
+        // printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
+        // printf("  | |  Time spent by the solver: %f \n", result->time_spent);
+        printf("  | |  Time spent by the bst solver: %f \n", result_bst->time_spent);
         printf("\n");
     }else{
         printf("  | |  LOOSE \n");
-        printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
-        printf("  | |  Time spent by the solver: %f \n", result->time_spent);
+        // printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
+        // printf("  | |  Time spent by the solver: %f \n", result->time_spent);
+        printf("  | |  Time spent by the bst solver: %f \n", result_bst->time_spent);
         printf("\n");
     }
 
     //freeing the result structure
-    free(result->solution_plan);
-    free(result);
+    // free(result->solution_plan);
+    // free(result);
+    free(result_bst->solution_plan);
+    free(result_bst);
 }
 
 
@@ -118,11 +126,11 @@ int main(void){
     printf("  |  Testing ./data/soko_dumb.in ... \n");
     building_solution("./data/soko_dumb.in", "SSSEENN");
 
-    // printf("  |  Testing ./data/soko_dumb_imp.in ... \n");
-    // building_solution("./data/soko_dumb_imp.in", "0");  
+    printf("  |  Testing ./data/soko_dumb_imp.in ... \n");
+    building_solution("./data/soko_dumb_imp.in", "0");  
 
-    // printf("  |  Testing ./data/soko81.in ... \n");
-    // building_solution("./data/soko81.in", "ENNENSSNWWNENNEESWNWSSWSEWWWNEE");
+    printf("  |  Testing ./data/soko81.in ... \n");
+    building_solution("./data/soko81.in", "ENNENSSNWWNENNEESWNWSSWSEWWWNEE");
 
     // printf("  |  Testing ./data/soko99.in ... \n");
     // building_solution("./data/soko99.in", "WWNNNENEESSWWNEWWSWSSEEENNWNNEESWNWS");

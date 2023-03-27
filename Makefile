@@ -45,8 +45,8 @@ test-linked-list-map: test-linked-list-map.o loader.o sokoban.o linked_list_map.
 test-queue-map: test-queue-map.o loader.o sokoban.o linked_list_map.o queue_map.o
 	$(CC) $(CFLAGS) -o test-queue-map test-queue-map.o loader.o sokoban.o linked_list_map.o queue_map.o
 
-test-solver: test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o 
-	$(CC) $(CFLAGS) -o test-solver test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o 
+test-solver: test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
+	$(CC) $(CFLAGS) -o test-solver test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
 
 test-bst-map: test-bst-map.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
 	$(CC) $(CFLAGS) -o test-bst-map test-bst-map.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
@@ -58,14 +58,14 @@ replay: replay.o loader.o sokoban.o
 play: play.o loader.o sokoban.o gui.o 
 	$(CC) $(CFLAGS) -o play play.o loader.o sokoban.o gui.o $(LDFLAGS)
 
-solve: solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o
-	$(CC) $(CFLAGS) -o solve solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o
+solve: solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
+	$(CC) $(CFLAGS) -o solve solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
 
 
 # put all your applications and tests executables as prerequisite of this rule
 # \ allows to go to the next line
 compile-all: test-loader test-move test-replay replay play solve \
-	test-linked-list-map test-queue-map test-solver #test-bst-map
+	test-linked-list-map test-queue-map test-solver test-bst-map
 	 
 compile-all-macOS: test-loader test-move test-replay \
 	replay test-linked-list-map test-queue-map test-bst-map

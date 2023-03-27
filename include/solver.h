@@ -6,6 +6,8 @@
 #include "loader.h"
 #include "linked_list_map.h"
 #include "queue_map.h"
+#include "bst_map.h"
+
 
 typedef struct stats stats;
 
@@ -48,6 +50,17 @@ bool wining_test(game_map map);
  * @return A pointer to the structure stat containing the solution plan and the other usefull parameters describe in the structure above.
  */
 stats *solver(game_map *initial_map);
+
+
+/**
+ * 
+ * @brief The function to solve a sokoban game using BST.
+ * 
+ * @param initial_map A pointer to the initial map that you want to solve.
+ * 
+ * @return A pointer to the structure stat containing the solution plan and the other usefull parameters describe in the structure above.
+ */
+stats *solver_bst(game_map *initial_map);
 
 
 /**

@@ -17,6 +17,8 @@
 #include "linked_list_map.h"
 #include "sokoban.h"
 #include "loader.h"
+#include "bst_map.h"
+
 
 int main(int argc, char *argv[]){
     //testing if the correct input has been given

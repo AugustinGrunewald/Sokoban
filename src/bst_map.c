@@ -11,20 +11,20 @@
 
 
 // auxiliary functions
-void print_level(bst_int tree, int level) {
-    for (int i = 0; i < level - 1; i++) {
-        printf("   ");
-    }
+// void print_level(bst_int tree, int level) {
+//     for (int i = 0; i < level - 1; i++) {
+//         printf("   ");
+//     }
 
-    if (is_empty(tree)) {
-        printf("%snil\n", level == 0 ? "" : " +-");
-        return;
-    }
+//     if (is_empty(tree)) {
+//         printf("%snil\n", level == 0 ? "" : " +-");
+//         return;
+//     }
 
-    printf("%s(%d)\n", level == 0 ? "" : " +-", tree->value);
-    print_level(tree->left, level + 1);
-    print_level(tree->right, level + 1);
-}
+//     printf("%s(%d)\n", level == 0 ? "" : " +-", tree->value);
+//     print_level(tree->left, level + 1);
+//     print_level(tree->right, level + 1);
+// }
 
 int max(int a, int b){
     if (a < b){
@@ -35,15 +35,16 @@ int max(int a, int b){
 }
 
 // functions from the signature
-void print_bst(bst_int tree) {
-    print_level(tree, 0);
-}
 
-bst_int nil(){
+// void print_bst(bst_map tree) {
+//     print_level(tree, 0);
+// }
+
+bst_map nil_tree(){
      return NULL;
 }
 
-bool is_empty(bst_int tree){
+bool is_empty_tree(bst_map tree){
     if (tree == NULL){
         return true;
     }else{
@@ -51,85 +52,103 @@ bool is_empty(bst_int tree){
     }
 }
 
-int value(bst_int tree){
-    return tree->value;
+game_map *value(bst_map tree){
+    return tree->p_map;
 }
 
-int size(bst_int tree){
+int size_tree(bst_map tree){
 
-    if (is_empty(tree) == true){
+    if (is_empty_tree(tree) == true){
         return 0;
     }
     else{
-        if (is_empty(tree->left) == true){
-        return 1 + size(tree->right);
+        if (is_empty_tree(tree->left) == true){
+        return 1 + size_tree(tree->right);
         }
-        if (is_empty(tree->right) == true){
-            return 1 + size(tree->left);
+        if (is_empty_tree(tree->right) == true){
+            return 1 + size_tree(tree->left);
         }
         else{
-            return 1 + size(tree->left) + size(tree->right);
+            return 1 + size_tree(tree->left) + size_tree(tree->right);
         }
     }
 }
 
-int height(bst_int tree){
-    if (is_empty(tree) == true){
+int height_tree(bst_map tree){
+    if (is_empty_tree(tree) == true){
         return 0;
     }
     else{
-        return 1 + max(height(tree->left), height(tree->right));
+        return 1 + max(height_tree(tree->left), height_tree(tree->right));
     }
 }
 
-bst_int left_child(bst_int tree){
+bst_map left_child(bst_map tree){
     return tree->left;
 }
 
-bst_int right_child(bst_int tree){
+bst_map right_child(bst_map tree){
     return tree->right;
 }
 
-bst_int retrieve(bst_int tree, int value){
-    if (size(tree) == 0){
+bst_map retrieve(bst_map tree, game_map *p_map){
+    if (size_tree(tree) == 0){
         return NULL;
     }else{
-        if (value == tree->value){
+        int map_length = p_map->map_size.height * p_map->map_size.width;
+        if (strncmp(p_map->map, tree->p_map->map, map_length) == 0){
             return tree;
         }
-        if (value < tree->value){
-            return retrieve(tree->left, value);
+        if (strncmp(p_map->map, tree->p_map->map, map_length) < 0){
+            return retrieve(tree->left, p_map);
         }else{
-            return retrieve(tree->right, value);
+            return retrieve(tree->right, p_map);
         }
     }
 }
 
-bst_int insert(bst_int tree, int value){
+bool searching_bst(bst_map tree, game_map *p_map){
+    if (size_tree(tree) == 0){
+        return false;
+    }else{
+        int map_length = p_map->map_size.height * p_map->map_size.width;
+        if (strncmp(p_map->map, tree->p_map->map, map_length) == 0){
+            return true;
+        }
+        if (strncmp(p_map->map, tree->p_map->map, map_length) < 0){
+            return retrieve(tree->left, p_map);
+        }else{
+            return retrieve(tree->right, p_map);
+        }
+    }
+}
+
+bst_map insert_tree(bst_map tree, game_map *p_map){
+    int map_length = p_map->map_size.height * p_map->map_size.width;
     if(tree == NULL){
-        bst_node_int* new_node = (bst_node_int*)malloc(sizeof(bst_node_int));
+        bst_node_map* new_node = (bst_node_map*)malloc(sizeof(bst_node_map));
         new_node->left = NULL;
         new_node->right = NULL;
-        new_node->value = value;
+        new_node->p_map = p_map;
 
         return new_node;
     }
-    if(value < tree->value){
-        tree->left = insert(tree->left, value);
-    }else if(value > tree->value){
-        tree->right = insert(tree->right, value);
+    if(strncmp(p_map->map, tree->p_map->map, map_length) < 0){
+        tree->left = insert_tree(tree->left, p_map);
+    }else if(strncmp(p_map->map, tree->p_map->map, map_length) > 0){
+        tree->right = insert_tree(tree->right, p_map);
     }
     return tree;
 }
 
-bst_int delete(bst_int tree, int value){
-    return NULL;
+bst_map delete_tree(bst_map tree, game_map *p_map){
+    return nil_tree();
 }
 
-void in_order_dfs_infix(bst_int tree){
+void in_order_dfs_infix(bst_map tree){
 
 }
 
-void deallocate_bst(bst_int tree){
+void deallocate_tree(bst_map tree){
 
 }
