@@ -31,8 +31,17 @@ typedef bst_node_int *bst_int;
 struct bst_node_int {
     /** The left subtree of the node */
     bst_int left;
-    /** The value/key in the node */
-    int value;
+
+    /** The cell informations contained in the node */
+    /** The map */
+    game_map *p_map;
+    /** The direction used to get the map */
+    char direction;
+    /** The depth of the node in the tree */
+    int depth;
+    /** An int representing how much right is the map */
+    int wining_ratio;
+
     /** The right subtree of the node */
     bst_int right;
 };
