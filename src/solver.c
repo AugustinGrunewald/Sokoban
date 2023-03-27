@@ -72,6 +72,7 @@ stats *solver(game_map *initial_map){
         dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->depth, p_current_cell->p_mother);
 
         if (wining_test(*p_current_map) == true){
+            free(p_current_cell);
             break;
         }
         char available_direction[] = "NSEW";
@@ -98,9 +99,12 @@ stats *solver(game_map *initial_map){
         //building the winning plan
         cell_map_queue *index = p_current_cell_bis;
         int length = plan_length(p_current_cell_bis);
-        char plan_bis[length];
-        char plan[length - 1];
+        char plan_bis[length]; 
 
+        //allocating enough place for the plan that will be return and that need to be saved after getting out of this function
+        char *plan = (char*)malloc((length)* sizeof(char));
+
+        //filling the plan_bis and then the real plan
         for (int i = 1; i < length; i++){
             plan_bis[length - i - 1] = index->direction;
             index = index->p_mother;
@@ -108,6 +112,7 @@ stats *solver(game_map *initial_map){
         for(int i = 0; i < length - 1; i++){
             plan[i] = plan_bis[i];
         }
+        plan[length - 1] = '\0';
 
         //filling the result structure
         result->solution_plan = plan;
