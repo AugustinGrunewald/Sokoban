@@ -35,14 +35,9 @@ int main(int argc, char *argv[]){
     stats *result;
     result = solver(loaded_map);
 
-    // printf("deefer %c\n", plan[0]);
     if (result->win == true){
         printf("  |  WIN \n");
         printf("  |  Wining plan: %s\n", result->solution_plan);
-        // for(int i = 0; i < sizeof(plan); i++){
-        //     printf("%c", plan[i]);
-        // }
-        // printf("\n");
         printf("  |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
         printf("  |  Time spent by the solver: %f \n", result->time_spent);
         printf("\n");
@@ -54,6 +49,7 @@ int main(int argc, char *argv[]){
     }
 
     //freeing the result structure
+    free(result->solution_plan);
     free(result);
     return 0;
 }

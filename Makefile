@@ -45,8 +45,8 @@ test-linked-list-map: test-linked-list-map.o loader.o sokoban.o linked_list_map.
 test-queue-map: test-queue-map.o loader.o sokoban.o linked_list_map.o queue_map.o
 	$(CC) $(CFLAGS) -o test-queue-map test-queue-map.o loader.o sokoban.o linked_list_map.o queue_map.o
 
-test-solver: test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o gui.o
-	$(CC) $(CFLAGS) -o test-solver test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o gui.o $(LDFLAGS)
+test-solver: test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o 
+	$(CC) $(CFLAGS) -o test-solver test-solver.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o 
 
 test-bst-map: test-bst-map.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
 	$(CC) $(CFLAGS) -o test-bst-map test-bst-map.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o

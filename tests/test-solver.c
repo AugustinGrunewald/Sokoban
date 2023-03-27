@@ -11,16 +11,17 @@
 #include <stdbool.h>
 #include <string.h>
 
-// #include <SDL2/SDL.h>
 
-// #include "gui.h"
 #include "solver.h"
 #include "queue_map.h"
 #include "linked_list_map.h"
 #include "sokoban.h"
 #include "loader.h"
 
+//trying to make a function using sdl to show the solving process
 
+// #include <SDL2/SDL.h>
+// #include "gui.h"
 
 // void replay_solver(const char *adress){
 //     game_map *current_step_map = map_loader(adress);
@@ -86,11 +87,10 @@ void building_solution(const char *adress, char *plan){
     stats *result;
     result = solver(loaded_map);
 
-    // printf("deefer %c\n", plan[0]);
     if (result->win == true){
         printf("  | |  WIN \n");
         printf("  | |  Wining plan: %s\n", result->solution_plan);
-        // // checking if the solution plan is the one given in test-solver.csv
+        // checking if the solution plan is the one given in test-solver.csv
         assert(strncmp(plan, result->solution_plan, result->plan_length) == 0);
         printf("  | |  Plan corresponding to the given one ...  YES \n");
         printf("  | |  Number of explored nodes: %d \n", result->nmb_explored_nodes);
@@ -112,11 +112,11 @@ void building_solution(const char *adress, char *plan){
 int main(void){
     printf("* Starting solver tests...\n");
 
-    printf("  |  Testing ./data/soko_dumber.in ... \n");
-    building_solution("./data/soko_dumber.in", "EE");
+    // printf("  |  Testing ./data/soko_dumber.in ... \n");
+    // building_solution("./data/soko_dumber.in", "EE");
 
-    // printf("  |  Testing ./data/soko_dumb.in ... \n");
-    // building_solution("./data/soko_dumb.in", "SSSEENN");
+    printf("  |  Testing ./data/soko_dumb.in ... \n");
+    building_solution("./data/soko_dumb.in", "SSSEENN");
 
     // printf("  |  Testing ./data/soko_dumb_imp.in ... \n");
     // building_solution("./data/soko_dumb_imp.in", "0");  

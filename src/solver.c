@@ -87,9 +87,10 @@ stats *solver(game_map *initial_map){
                 free(p_new_map);
             }else{
                 explored_list = cons(p_new_map, explored_list);
-                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_current_cell->depth + 1, p_current_cell);
+                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_current_cell->depth + 1, p_first_last_pointers_bis->p_last);
             }
         }
+        free(p_current_cell);
     }
 
     cell_map_queue *p_current_cell_bis = p_first_last_pointers_bis->p_last;
