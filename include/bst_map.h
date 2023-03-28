@@ -84,64 +84,6 @@ game_map *value(bst_map tree);
 
 
 /**
- * @brief The number of nodes in the binary search tree.
- *
- * @param tree the tree
- *
- * @return the number of nodes in the tree
- */
-int size_tree(bst_map tree);
-
-
-/**
- * @brief The height of the binary search tree.
- *
- * @param tree the tree
- *
- * @return the height of the tree
- */
-int height_tree(bst_map tree);
-
-
-/**
- * @brief The left subtree of the tree.
- *
- * @param tree the tree
- *
- * @pre `tree` is not empty.
- *
- * @return the left subtree of `tree`
- */
-bst_map left_child(bst_map tree);
-
-
-/**
- * @brief The right subtree of the tree.
- *
- * @param tree the tree
- *
- * @pre `tree` is not empty.
- *
- * @return the right subtree of `tree`
- */
-bst_map right_child(bst_map tree);
-
-
-/**
- * @brief Retrieve a subtree in the tree given the value of
- *        its root.
- *
- * @param tree   a pointer to the tree
- * @param value  the value of the root of the subtree to search
- *
- * @return an empty tree if the value is not in
- *         the binary search tree, the subtree
- *         whose root contains the value otherwise
- */
-bst_map retrieve(bst_map tree, game_map *p_map);
-
-
-/**
  * @brief Gives true or false if the tree has the wanted map or not.
  *
  * @param tree   a pointer to the tree
@@ -165,21 +107,6 @@ bool searching_bst(bst_map tree, game_map *p_map);
  *         the tree, no new node is inserted and `tree` is returned.
  */
 bst_map insert_tree(bst_map tree, game_map *p_map);
-
-
-/**
- * @brief Delete a value in the tree.
- *
- * @param tree   the tree in which the value is to be deleted
- * @param value  the value to be deleted
- *
- * @return a tree such that if there was a node containing
- *       `value` in `tree`, then this node is deleted.
- *       This deletion is such that the binary
- *       search property is verified. If the node was
- *       not in the tree, `tree` is returned.
- */
-bst_map delete_tree(bst_map tree, game_map *p_map);
 
 
 /**

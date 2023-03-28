@@ -56,69 +56,22 @@ game_map *value(bst_map tree){
     return tree->p_map;
 }
 
-int size_tree(bst_map tree){
-
-    if (is_empty_tree(tree) == true){
-        return 0;
-    }
-    else{
-        if (is_empty_tree(tree->left) == true){
-        return 1 + size_tree(tree->right);
-        }
-        if (is_empty_tree(tree->right) == true){
-            return 1 + size_tree(tree->left);
-        }
-        else{
-            return 1 + size_tree(tree->left) + size_tree(tree->right);
-        }
-    }
-}
-
-int height_tree(bst_map tree){
-    if (is_empty_tree(tree) == true){
-        return 0;
-    }
-    else{
-        return 1 + max(height_tree(tree->left), height_tree(tree->right));
-    }
-}
-
-bst_map left_child(bst_map tree){
-    return tree->left;
-}
-
-bst_map right_child(bst_map tree){
-    return tree->right;
-}
-
-bst_map retrieve(bst_map tree, game_map *p_map){
-    if (size_tree(tree) == 0){
-        return NULL;
-    }else{
-        int map_length = p_map->map_size.height * p_map->map_size.width;
-        if (strncmp(p_map->map, tree->p_map->map, map_length) == 0){
-            return tree;
-        }
-        if (strncmp(p_map->map, tree->p_map->map, map_length) < 0){
-            return retrieve(tree->left, p_map);
-        }else{
-            return retrieve(tree->right, p_map);
-        }
-    }
-}
-
 bool searching_bst(bst_map tree, game_map *p_map){
-    if (size_tree(tree) == 0){
-        return false;
+    bool result = false;
+    if (is_empty_tree(tree) == true){
+        return result;
     }else{
         int map_length = p_map->map_size.height * p_map->map_size.width;
-        if (strncmp(p_map->map, tree->p_map->map, map_length) == 0){
-            return true;
+        if (p_map->player_pos.height == tree->p_map->player_pos.height || p_map->player_pos.width == tree->p_map->player_pos.width){
+            if (strncmp(p_map->map, tree->p_map->map, map_length) == 0){
+                result = true;
+                return result;
+            }
         }
         if (strncmp(p_map->map, tree->p_map->map, map_length) < 0){
-            return retrieve(tree->left, p_map);
+            return searching_bst(tree->left, p_map);
         }else{
-            return retrieve(tree->right, p_map);
+            return searching_bst(tree->right, p_map);
         }
     }
 }
@@ -141,14 +94,14 @@ bst_map insert_tree(bst_map tree, game_map *p_map){
     return tree;
 }
 
-bst_map delete_tree(bst_map tree, game_map *p_map){
-    return nil_tree();
-}
-
 void in_order_dfs_infix(bst_map tree){
 
 }
 
 void deallocate_tree(bst_map tree){
-
+    if (is_empty_tree(tree) == false){
+        deallocate_tree(tree->left);
+        deallocate_tree(tree->right);
+        free(tree);
+    }
 }

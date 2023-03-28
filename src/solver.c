@@ -258,7 +258,7 @@ stats *solver_bst(game_map *initial_map){
         //freeing the memory
         deallocate_queue_solver(search_queue);
         deallocate_queue_solver(dequeued_queue);
-        // deallocate_list_solver(explored_list);
+        deallocate_tree(explored_tree);
 
         free(p_first_last_pointers);
         free(p_first_last_pointers_bis);
@@ -279,7 +279,7 @@ stats *solver_bst(game_map *initial_map){
         //freeing the memory
         deallocate_queue_solver(search_queue);
         deallocate_queue_solver(dequeued_queue);
-        // deallocate_list_solver(explored_list);
+        deallocate_tree(explored_tree);
 
         free(p_first_last_pointers);
         free(p_first_last_pointers_bis);
@@ -298,11 +298,16 @@ bool searching_linked_list(game_map *p_map, linked_list_map list){
     cell_map *index = list;
 
     while (index != NULL) {
-        if (comparaison_two_maps(*(index->p_map), *p_map) == true){
-            result = true;
-            return result;
+        //first testing if the players are at the same position, this really increased the solving process 
+        if (index->p_map->player_pos.height == p_map->player_pos.height || index->p_map->player_pos.width == p_map->player_pos.width){
+            if (strncmp(index->p_map->map, p_map->map, p_map->map_size.height * p_map->map_size.width) == 0){
+                result = true;
+                return result;
+            }
+            index = index->p_next;
+        }else{
+            index = index->p_next; 
         }
-        index = index->p_next; 
     }
 
     return result;
