@@ -49,7 +49,7 @@ stats *solver(game_map *initial_map){
     p_first_last_pointers_bis->p_last = NULL;
 
     //starting the algorithm
-    search_queue = enqueue_bis(search_queue, p_first_last_pointers, initial_map, '.', 0, NULL);
+    search_queue = enqueue_bis(search_queue, p_first_last_pointers, initial_map, '.', NULL);
     explored_list = cons(initial_map, explored_list);
     dequeuing_tool dequeue_result;
 
@@ -69,7 +69,7 @@ stats *solver(game_map *initial_map){
         //simpler name use in the rest of the loop
         p_current_map = p_current_cell->p_map;
         
-        dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->depth, p_current_cell->p_mother);
+        dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->p_mother);
 
         if (wining_test(*p_current_map) == true){
             free(p_current_cell);
@@ -87,7 +87,7 @@ stats *solver(game_map *initial_map){
                 free(p_new_map);
             }else{
                 explored_list = cons(p_new_map, explored_list);
-                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_current_cell->depth + 1, p_first_last_pointers_bis->p_last);
+                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_first_last_pointers_bis->p_last);
             }
         }
         free(p_current_cell);
@@ -182,7 +182,7 @@ stats *solver_bst(game_map *initial_map){
     p_first_last_pointers_bis->p_last = NULL;
 
     //starting the algorithm
-    search_queue = enqueue_bis(search_queue, p_first_last_pointers, initial_map, '.', 0, NULL);
+    search_queue = enqueue_bis(search_queue, p_first_last_pointers, initial_map, '.', NULL);
     explored_tree = insert_tree(explored_tree, initial_map);
     dequeuing_tool dequeue_result;
 
@@ -202,7 +202,7 @@ stats *solver_bst(game_map *initial_map){
         //simpler name use in the rest of the loop
         p_current_map = p_current_cell->p_map;
         
-        dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->depth, p_current_cell->p_mother);
+        dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->p_mother);
 
         if (wining_test(*p_current_map) == true){
             free(p_current_cell);
@@ -220,7 +220,7 @@ stats *solver_bst(game_map *initial_map){
                 free(p_new_map);
             }else{
                 explored_tree = insert_tree(explored_tree, p_new_map);
-                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_current_cell->depth + 1, p_first_last_pointers_bis->p_last);
+                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_first_last_pointers_bis->p_last);
             }
         }
         free(p_current_cell);

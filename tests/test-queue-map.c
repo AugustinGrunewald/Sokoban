@@ -37,15 +37,15 @@ void building_testing_queue_map(const char *adress_1, const char *adress_2, cons
     p_first_last_pointers->p_last = NULL;
 
     //enqueueing the first map
-    list = enqueue_bis(list, p_first_last_pointers, loaded_map_1, 'N', 0, NULL);
+    list = enqueue_bis(list, p_first_last_pointers, loaded_map_1, 'N', NULL);
     //enqeueing the second map (saying the mother cell is cell 1)
-    list = enqueue_bis(list, p_first_last_pointers, loaded_map_2, 'S', 1, p_first_last_pointers->p_last);
+    list = enqueue_bis(list, p_first_last_pointers, loaded_map_2, 'S', p_first_last_pointers->p_last);
     //enqeueing the third map (saying the mother cell is cell 2)
-    list = enqueue_bis(list, p_first_last_pointers, loaded_map_3, 'E', 2, p_first_last_pointers->p_last);
+    list = enqueue_bis(list, p_first_last_pointers, loaded_map_3, 'E', p_first_last_pointers->p_last);
     //enqeueing the four map (saying the mother cell is cell 2)
-    list = enqueue_bis(list, p_first_last_pointers, loaded_map_4, 'S', 3, p_first_last_pointers->p_first->p_next);
+    list = enqueue_bis(list, p_first_last_pointers, loaded_map_4, 'S', p_first_last_pointers->p_first->p_next);
     //enqeueing the five map (saying the mother cell is cell 3)
-    list = enqueue_bis(list, p_first_last_pointers, loaded_map_5, 'W', 4, p_first_last_pointers->p_first->p_next->p_next);
+    list = enqueue_bis(list, p_first_last_pointers, loaded_map_5, 'W', p_first_last_pointers->p_first->p_next->p_next);
 
 
     //checking if the element are at the right place 

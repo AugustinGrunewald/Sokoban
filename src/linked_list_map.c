@@ -12,23 +12,14 @@ linked_list_map nil(){
 }
 
 linked_list_map cons(game_map *p_map, linked_list_map list){
+    //allocating the needed memory for the cell
     cell_map *p_new_list = (cell_map *) malloc(sizeof(cell_map));
 
+    //filling the new cell
     p_new_list->p_map = p_map;
     p_new_list->p_next = list; 
+
     return p_new_list;
-}
-
-int size(linked_list_map list){
-    int size = 0;
-    cell_map *index = list;
-
-    while (index != NULL) {
-        index = index->p_next; 
-        size++;
-    }
-
-    return size;
 }
 
 bool is_empty(linked_list_map list){
@@ -39,18 +30,10 @@ bool is_empty(linked_list_map list){
     }
 }
 
-void print_list(linked_list_map list){
-    cell_map *index = list;
-
-    while (index != NULL){
-        print_map(*(index->p_map));
-        index = index->p_next;
-    }
-}
-
 game_map *get_element(linked_list_map list, int indice){
     cell_map *current_cell = list;
 
+    //Go to the wanted indice in the list and returning the game map
     for (int ind = 0; ind < indice; ind++){
         current_cell = current_cell->p_next;
     }
@@ -60,6 +43,7 @@ game_map *get_element(linked_list_map list, int indice){
 linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map){
     cell_map *current_cell = list;
     cell_map *old_cell = list;
+    // allocating the needed space for the new cell
     cell_map *new_cell = (cell_map *)malloc(sizeof(cell_map));
 
     //particular case : indice = 0
@@ -68,6 +52,8 @@ linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map
         return cons(p_map, list);
     }
     else{
+        //going to the the right places in the list :
+        //current_cell = cell after the new cell / old_cell = cell before the new cell
         for (int ind = 0; ind < indice; ind++){
             current_cell = current_cell->p_next;
         }
@@ -75,8 +61,11 @@ linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map
             old_cell = old_cell->p_next;
         }
 
+        //filling the new cell and linking it to the next cell
         new_cell->p_map = p_map;
         new_cell->p_next = current_cell;
+
+        //linking the previous cell to the new cell 
         old_cell->p_next = new_cell;
 
         return list;
@@ -93,6 +82,8 @@ linked_list_map remove_element(linked_list_map list, int indice){
         return list->p_next;
     }
     else{
+        // going to the right places in the list :
+        // current cell = cell after the removed cell / old_cell = cell before the removed cell
         for (int ind = 0; ind < indice; ind++){
             current_cell = current_cell->p_next;
         }
@@ -100,9 +91,12 @@ linked_list_map remove_element(linked_list_map list, int indice){
             old_cell = old_cell->p_next;
         }
 
+        //linking the old and current cell
         copy_cell = current_cell;
         current_cell = current_cell->p_next;
         old_cell->p_next = current_cell;
+
+        //freeing the cell that is removed
         free(copy_cell);
         
         return list;
@@ -112,6 +106,8 @@ linked_list_map remove_element(linked_list_map list, int indice){
 void deallocate_list(linked_list_map list){
     if (is_empty(list) == false){
         deallocate_list(list->p_next);
+
+        //freeing the cell
         free(list);
     }    
 }
@@ -119,7 +115,9 @@ void deallocate_list(linked_list_map list){
 void deallocate_list_solver(linked_list_map list){
     if (is_empty(list) == false){
         deallocate_list(list->p_next);
-        // free(list->p_map);
+
+        //freeing only the cell, the string giving the map and the structure giving the game_map are 
+        //freed using the dequeue_queue (only used in the solver)
         free(list);
     }    
 }

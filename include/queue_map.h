@@ -18,16 +18,21 @@ typedef cell_map_queue *queue_map;
  * 
  */
 struct cell_map_queue {
+    /** The map */
     game_map *p_map;
+
+    /** The pointers to the next cell and to the mother cell */
     cell_map_queue *p_next;
     cell_map_queue *p_mother;
+
+    /** The direction used to build this cell */
     char direction;
-    int depth;
 };
 
 
 /**
- * @brief the structure used to obtain a queue with a complexity of O(1) for both enqueue and dequeue.
+ * @brief the structure used to obtain a queue with a complexity 
+ *        of O(1) for both enqueue and dequeue.
  * 
  */
 struct first_last_pointers {
@@ -36,7 +41,8 @@ struct first_last_pointers {
 };
 
 /**
- * @brief the structure returned by the dequeue function to get the removed cell map, the updated queue and the pointers to the first and last cell.
+ * @brief the structure returned by the dequeue function to get the removed cell map, 
+ *        the updated queue and the pointers to the first and last cell.
  * 
  */
 struct dequeuing_tool {
@@ -54,7 +60,7 @@ queue_map nil_queue();
 
 
 /**
- * @brief trying a new version of the enqueue function that should be simplier
+ * @brief New version of the enqueue that should had a new cell at the tail of the queue.
  *
  * @param queue the queue used in the function.
  * 
@@ -64,13 +70,11 @@ queue_map nil_queue();
  * 
  * @param direction the direction used to get the new map (N,S,E,W).
  * 
- * @param depth the depth at which youplace the new map.
- * 
  * @param p_mother a pointer to the mother cell of the new one.
  * 
  * @return the queue with the new map that has been enqueue.
  */
-queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointers, game_map *p_map, char direction, int depth, cell_map_queue *p_mother);
+queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointers, game_map *p_map, char direction, cell_map_queue *p_mother);
 
 
 /**
@@ -80,19 +84,10 @@ queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointer
  * 
  * @param first_last_pointers the structure giving two pointers to the first and last cell.
  * 
- * @return dequeuing_tool the structure giving the removed cell map, the updated queue and the two pointers to the first and last cell. 
+ * @return dequeuing_tool the structure giving the removed cell map, 
+ *         the updated queue and the two pointers to the first and last cell. 
  */
 dequeuing_tool dequeue_bis(queue_map queue, first_last_pointers *p_first_last_pointers);
-
-
-/**
- * @brief Giving the size of your queue (number of cells).
- * 
- * @param queue the queue for which you want to know the size.
- * 
- * @return int representing the size of the queue.
- */
-int size_queue(queue_map queue);
 
 
 /**
@@ -107,14 +102,6 @@ bool is_empty_queue(queue_map queue);
 
 
 /**
- * @brief Print the maps of the queue in the console.
- * 
- * @param queue 
- */
-void print_queue(queue_map queue);
-
-
-/**
  * @brief Get the game map of index "indice" of the queue. 
  * 
  * @param queue the queue you use.
@@ -124,14 +111,6 @@ void print_queue(queue_map queue);
  * @return game_map* the wanted game map in the queue.
  */
 game_map *get_element_queue(queue_map queue, int indice);
-
-
-/**
- * @brief Function that should free all the queue.
- * 
- * @param queue 
- */
-void deallocate_queue(queue_map queue);
 
 
 /**

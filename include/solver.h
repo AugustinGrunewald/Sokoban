@@ -11,6 +11,11 @@
 
 typedef struct stats stats;
 
+
+/**
+ * @brief The structure returned by the two versions of the solver.
+ * 
+ */
 struct stats{
     /** A boolean statting if there is a wining plan or not.*/
     bool win;

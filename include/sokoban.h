@@ -3,6 +3,23 @@
 
 #include <stdbool.h>
 
+/** Defining different constants to improve the readibility. */
+#define NORD 'N'
+#define SOUTH 'S'
+#define EAST 'E'
+#define WEST 'W'
+
+#define STORAGE_EMPTY '.'
+#define BOX_ON '*'
+#define BOX_EMPTY '$'
+#define BOY_ON '+'
+#define BOY_EMPTY '@'
+#define EMPTY ' '
+#define WALL '#'
+
+
+
+/** Defining the structures. */
 typedef struct game_map game_map;
 typedef struct couple couple;
 typedef struct double_couple double_couple;
@@ -33,6 +50,7 @@ struct double_couple {
     /** a couple representing the second available movement*/
     couple second_level;
 };
+
 
 /**
  * @brief The structure representing the game map.

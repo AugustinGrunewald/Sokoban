@@ -13,7 +13,10 @@ typedef cell_map *linked_list_map;
  * 
  */
 struct cell_map {
+    /** The structure containing the game map */
     game_map *p_map;
+
+    /** The pointer to the next cell of the list */
     cell_map *p_next;
 };
 
@@ -28,23 +31,14 @@ linked_list_map nil();
 /**
  * @brief Adding a game map to the linked list.
  * 
- * @param element an element to add to the linked list.
+ * @param p_map a pointer to the game map to add to the linked list.
  * 
  * @param list the list in which you add the new element.
  * 
- * @return linked_list_map the new linked list with the game map as new first cell. 
+ * @return linked_list_map the new linked list with the 
+ *         game map as new first cell. 
  */
 linked_list_map cons(game_map *p_map, linked_list_map list);
-
-
-/**
- * @brief Giving the size of your linked list (number of cells).
- * 
- * @param list the list for which you want to know the size.
- * 
- * @return int representing the size of the linked list.
- */
-int size(linked_list_map list);
 
 
 /**
@@ -59,19 +53,11 @@ bool is_empty(linked_list_map list);
 
 
 /**
- * @brief Print the map of the linked list in the console.
- * 
- * @param list 
- */
-void print_list(linked_list_map list);
-
-
-/**
  * @brief Get the game map of index "indice" of the linked list. 
  * 
  * @param list the list you use.
  * 
- * @param indice the indice of the element you want to get.
+ * @param indice the indice of the map you want to get.
  * 
  * @return game_map* the wanted game map in the list.
  */
