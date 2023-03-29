@@ -33,3 +33,11 @@ in a corner. In this case all the map explored from this one were useless. This 
 
 EXECUTING EXPLANATION:
 Reminder : everything is already detailled in the head of the concerned functions.
+I give some example of uses.
+
+Play function: ./play data/soko1.in
+
+Replay function: ./replay data/soko1.in 7 "NNNEEESSS"
+
+Solve function: ./solve data/soko1.in
+You will have to interact in the console (choosing the solver type and if you want to show the solving process using SDL). 
