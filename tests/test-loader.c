@@ -11,6 +11,13 @@
 #include "loader.h"
 #include "sokoban.h"
 
+
+/**
+ * @brief A function to test if the loader works. All the informations are basicly printed on the computer.
+ * 
+ * @param adress The adress of the map you want to load.
+ */
+
 void testing_loader(const char *adress) {
     printf("  | Testing the loader with %s ...  \n", adress);
 
@@ -22,6 +29,14 @@ void testing_loader(const char *adress) {
     printf("OK!\n");
     printf("\n");
 }
+
+
+
+/**
+ * @brief The main of this file that should only test the loader on some maps. 
+ * 
+ * @return Nothing. 
+ */
 
 int main(void){
     printf("* Starting loader tests...\n");

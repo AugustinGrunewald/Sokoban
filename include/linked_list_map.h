@@ -1,3 +1,9 @@
+/**
+ * @file linked_list_map.h
+ * 
+ * @brief The include file for the linked list.
+ */
+
 #ifndef LINKED_LIST_MAP_H
 #define LINKED_LIST_MAP_H
 
@@ -5,7 +11,11 @@
 #include "sokoban.h"
 #include "loader.h"
 
+
+/** Renaming the cell map structure. */
 typedef struct cell_map  cell_map;
+
+/** Defining the linked list structure. */
 typedef cell_map *linked_list_map;
 
 /**
@@ -81,7 +91,7 @@ linked_list_map insert_element(linked_list_map list, int indice, game_map *p_map
 /**
  * @brief Remove the cell of a certain indice in the linked list.
  * 
- * @param list the list you use.
+ * @param list_remove_element the list you use.
  * 
  * @param indice the indice of the cell you want to remove.
  * 

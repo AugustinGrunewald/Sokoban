@@ -1,3 +1,9 @@
+/**
+ * @file gui.c
+ * 
+ * @brief The file containing all the functions related to GUI and SDL.
+ */
+
 #include <SDL2/SDL.h>
 #include <signal.h>
 #include "gui.h"

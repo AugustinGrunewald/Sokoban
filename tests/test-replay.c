@@ -12,8 +12,21 @@
 #include "sokoban.h"
 #include "loader.h"
 
+
+/**
+ * @brief A function that tests the replay function.
+ * 
+ * @param adress_original_file The first map to which you want to move the player.
+ * 
+ * @param plan_length The number of movement you want to make from the list (should be < length of the plan).
+ * 
+ * @param plan The string containing the movements characters.
+ * 
+ * @param adress_result_file The adress of the map you should get a the end of the test (it's loaded to then compare the map build with replay with this one).
+ */
+
 void test_replay(const char *adress_original_file, int plan_length, char *plan, const char *adress_result_file){
-    printf("  | | testing the replay with %s, a plan length of %d, a plan of %s ... \n", adress_original_file, plan_length, plan);
+    printf("  | | Testing the replay with %s, a plan length of %d, a plan of %s ... \n", adress_original_file, plan_length, plan);
 
     //loading the differents maps used for the test
     game_map *original_map = map_loader(adress_original_file);
@@ -32,6 +45,13 @@ void test_replay(const char *adress_original_file, int plan_length, char *plan, 
     free(original_map->map);
     free(original_map);
 }
+
+
+/**
+ * @brief The main of this file that should test replaying some maps.
+ * 
+ * @return Nothing 
+ */
 
 int main(void){
     printf("* Starting replay tests...\n");

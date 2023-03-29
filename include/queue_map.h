@@ -1,3 +1,9 @@
+/**
+ * @file queue_map.h
+ *
+ * @brief The include file for queue map.
+ */
+
 #ifndef QUEUE_MAP_H
 #define QUEUE_MAP_H
 
@@ -6,10 +12,28 @@
 #include "loader.h"
 
 
+/**
+ * @brief renaming the cell map queue structure
+ * 
+ */
 typedef struct cell_map_queue  cell_map_queue;
+
+/**
+ * @brief renaming the first last pointers structure.
+ * 
+ */
 typedef struct first_last_pointers first_last_pointers;
-typedef struct enqueuing_tool enqueuing_tool;
+
+/**
+ * @brief renaming the dequeuing tool structure.
+ * 
+ */
 typedef struct dequeuing_tool dequeuing_tool;
+
+/**
+ * @brief creating the structure of queue (pointer to a cell).
+ * 
+ */
 typedef cell_map_queue *queue_map;
 
 
@@ -21,8 +45,10 @@ struct cell_map_queue {
     /** The map */
     game_map *p_map;
 
-    /** The pointers to the next cell and to the mother cell */
+    /** The pointer to the next cell */
     cell_map_queue *p_next;
+
+    /** the pointer to the mother cell */
     cell_map_queue *p_mother;
 
     /** The direction used to build this cell */
@@ -36,7 +62,10 @@ struct cell_map_queue {
  * 
  */
 struct first_last_pointers {
+    /** A pointer to the first cell of the queue. */
     cell_map_queue *p_first;
+
+    /** A pointer to the last cell of the queue. */
     cell_map_queue *p_last;
 };
 
@@ -46,7 +75,10 @@ struct first_last_pointers {
  * 
  */
 struct dequeuing_tool {
+    /** The returned queue. */
     queue_map queue;
+
+    /** The map that is dequeued. */
     cell_map_queue *p_map;
 };
 
@@ -82,7 +114,7 @@ queue_map enqueue_bis(queue_map queue, first_last_pointers *p_first_last_pointer
  * 
  * @param queue the queue in which you want to dequeue the map.
  * 
- * @param first_last_pointers the structure giving two pointers to the first and last cell.
+ * @param p_first_last_pointers the structure giving two pointers to the first and last cell.
  * 
  * @return dequeuing_tool the structure giving the removed cell map, 
  *         the updated queue and the two pointers to the first and last cell. 

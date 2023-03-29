@@ -1,3 +1,9 @@
+/**
+ * @file bst_map.h
+ * 
+ * @brief The include file for the bst. 
+ */
+
 #ifndef BST_MAP_H
 #define BST_MAP_H
 
@@ -74,8 +80,9 @@ bool is_empty_tree(bst_map tree);
 /**
  * @brief Gives true or false if the tree has the wanted map or not.
  *
- * @param tree   a pointer to the tree
- * @param value  the value of the root of the subtree to search
+ * @param tree a pointer to the tree.
+ * 
+ * @param p_map the map you want to search inside the tree.
  *
  * @return true if the map is in the tree.
  * @return false if not.
@@ -86,8 +93,9 @@ bool searching_bst(bst_map tree, game_map *p_map);
 /**
  * @brief Insert a value in the tree.
  *
- * @param tree   the tree in which the value is to be inserted
- * @param value  the value to be inserted
+ * @param tree   the tree in which the value is to be inserted.
+ * 
+ * @param p_map the map you want to insert inside the tree.
  *
  * @return a tree in which there is a node containing `value`.
  *         This node is correctly placed with respect to the

@@ -17,6 +17,21 @@
 #include "loader.h"
 #include "bst_map.h"
 
+
+/**
+ * @brief A function that should test the different functions related to the bst (insert, nil, deallocate, ...).
+ * 
+ * @param adress_1 Adress number 1.
+ * 
+ * @param adress_2 Adress number 2.
+ * 
+ * @param adress_3 Adress number 3.
+ * 
+ * @param adress_4 Adress number 4.
+ * 
+ * @param adress_5 Adress number 5.
+ */
+
 void building_test_bst_map (const char *adress_1, const char *adress_2, const char *adress_3, const char *adress_4, const char *adress_5){
     //loading the different maps
     game_map *loaded_map_1 = map_loader(adress_1);
@@ -86,6 +101,14 @@ void building_test_bst_map (const char *adress_1, const char *adress_2, const ch
     free(loaded_map_5->map);
     free(loaded_map_5);
 }
+
+
+
+/**
+ * @brief The main of this file that should test if the bst functions are working.
+ * 
+ * @return Nothing. 
+ */
 
 int main(void){
     printf("* Starting BST tests...\n");

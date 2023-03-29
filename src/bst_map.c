@@ -1,3 +1,9 @@
+/**
+ * @file bst_map.c
+ * 
+ * @brief The file containing all the functions for the bst.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

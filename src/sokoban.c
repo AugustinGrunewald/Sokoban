@@ -1,3 +1,9 @@
+/**
+ * @file sokoban.c
+ * 
+ * @brief The file containing all the mains functions of the project. 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

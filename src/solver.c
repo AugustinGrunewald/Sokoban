@@ -1,3 +1,9 @@
+/**
+ * @file solver.c
+ * 
+ * @brief The file containing all the functions used in solver.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -71,23 +77,26 @@ stats *solver(game_map *initial_map){
         
         dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->p_mother);
 
-        if (wining_test(*p_current_map) == true){
-            free(p_current_cell);
-            break;
-        }
-        char available_direction[] = "NSEW";
+        //checking if there is a box in the corner, in this case don't search with this map
+        if (box_in_corner(p_current_map) == false){
+            if (wining_test(*p_current_map) == true){
+                free(p_current_cell);
+                break;
+            }
+            char available_direction[] = "NSEW";
 
-        for (int i = 0; i < 4; i++){
-            char direction = available_direction[i];
+            for (int i = 0; i < 4; i++){
+                char direction = available_direction[i];
 
-            game_map *p_new_map = move(p_current_map, direction);
+                game_map *p_new_map = move(p_current_map, direction);
 
-            if (searching_linked_list(p_new_map, explored_list) == true){
-                free(p_new_map->map);
-                free(p_new_map);
-            }else{
-                explored_list = cons(p_new_map, explored_list);
-                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_first_last_pointers_bis->p_last);
+                if (searching_linked_list(p_new_map, explored_list) == true){
+                    free(p_new_map->map);
+                    free(p_new_map);
+                }else{
+                    explored_list = cons(p_new_map, explored_list);
+                    search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_first_last_pointers_bis->p_last);
+                }
             }
         }
         free(p_current_cell);
@@ -204,23 +213,26 @@ stats *solver_bst(game_map *initial_map){
         
         dequeued_queue = enqueue_bis(dequeued_queue, p_first_last_pointers_bis, p_current_map, p_current_cell->direction, p_current_cell->p_mother);
 
-        if (wining_test(*p_current_map) == true){
-            free(p_current_cell);
-            break;
-        }
-        char available_direction[] = "NSEW";
+        //checking if there is a box in the corner, in this case don't search with this map
+        if (box_in_corner(p_current_map) == false){
+            if (wining_test(*p_current_map) == true){
+                free(p_current_cell);
+                break;
+            }
+            char available_direction[] = "NSEW";
 
-        for (int i = 0; i < 4; i++){
-            char direction = available_direction[i];
+            for (int i = 0; i < 4; i++){
+                char direction = available_direction[i];
 
-            game_map *p_new_map = move(p_current_map, direction);
+                game_map *p_new_map = move(p_current_map, direction);
 
-            if (searching_bst(explored_tree, p_new_map) == true){
-                free(p_new_map->map);
-                free(p_new_map);
-            }else{
-                explored_tree = insert_tree(explored_tree, p_new_map);
-                search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_first_last_pointers_bis->p_last);
+                if (searching_bst(explored_tree, p_new_map) == true){
+                    free(p_new_map->map);
+                    free(p_new_map);
+                }else{
+                    explored_tree = insert_tree(explored_tree, p_new_map);
+                    search_queue = enqueue_bis(search_queue, p_first_last_pointers, p_new_map, direction, p_first_last_pointers_bis->p_last);
+                }
             }
         }
         free(p_current_cell);
@@ -323,4 +335,47 @@ int plan_length(queue_map queue){
     }
 
     return size;
+}
+
+bool box_in_corner(game_map *p_map){
+    //initialasing some parameters
+    bool result = false;
+    int plan_length = p_map->map_size.height * p_map->map_size.width;
+    char *map = p_map->map;
+
+    for (int ind = 0; ind < plan_length; ind++){
+        if (map[ind] == BOX_EMPTY){
+            //four different case to check: 
+            //two case with a wall on the left  
+            if (map[ind - 1] == WALL){
+                //checking above the player
+                if (map[ind - p_map->map_size.width] == WALL){
+                    result = true;
+                    return result;
+                }
+
+                //checking under the player
+                if (map[ind + p_map->map_size.width] == WALL){
+                    result = true;
+                    return result;
+                }
+            }
+
+            //two case with a wall on the right
+            if (map[ind + 1] == WALL){
+                //checking above the player
+                if (map[ind - p_map->map_size.width] == WALL){
+                    result = true;
+                    return result;
+                }
+                //checking under the player
+                if (map[ind + p_map->map_size.width] == WALL){
+                    result = true;
+                    return result;
+                }
+            }
+        }
+    }
+
+    return result;
 }

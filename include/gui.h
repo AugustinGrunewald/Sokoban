@@ -1,3 +1,9 @@
+/**
+ * @file gui.h
+ * 
+ * @brief The include file for the gui functions using SDL.
+ */
+
 #ifndef GUI_H
 #define GUI_H
 

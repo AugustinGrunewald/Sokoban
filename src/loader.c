@@ -1,3 +1,9 @@
+/**
+ * @file loader.c
+ * 
+ * @brief The file containing the loading function.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

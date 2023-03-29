@@ -1,3 +1,9 @@
+/**
+ * @file solver.h
+ * 
+ * @brief The include file for the solver.
+ */
+
 #ifndef SOLVER_H
 #define SOLVER_H
 
@@ -8,7 +14,7 @@
 #include "queue_map.h"
 #include "bst_map.h"
 
-
+/** Renaming the stats structure. */
 typedef struct stats stats;
 
 
@@ -91,5 +97,16 @@ bool searching_linked_list(game_map *p_map, linked_list_map list);
  * @return an int representing the size researched.
  */
 int plan_length(queue_map queue);
+
+
+/**
+ * @brief A function to check if there is a box in a corner. It will help optimizing the code.
+ * 
+ * @param p_map The used map. 
+ * 
+ * @return true if there is a box in a corner.
+ * @return false if there is no box in a corner.
+ */
+bool box_in_corner(game_map *p_map);
 
 #endif

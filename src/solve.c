@@ -23,6 +23,14 @@
 #include "bst_map.h"
 
 
+/**
+ * @brief A function to show using SDL the solving process (only playing the wining map).
+ * 
+ * @param result The stats structure that contains all the informations returned by the solver.
+ * 
+ * @param adress The adress of the map that is solved.
+ */
+
 void replay_solving_process(stats *result, const char *adress){
     //initializing the map and the main parameters associated
     game_map *current_step_map = map_loader(adress);
@@ -88,11 +96,6 @@ void replay_solving_process(stats *result, const char *adress){
                 break;
         }
 
-        // //instruction to quit the solving process if the user want to
-        // if (GUI_get_key() == 'q'){
-        //     stop = true;
-        // }
-
         //incrementing the indice
         ind++;
         
@@ -107,6 +110,14 @@ void replay_solving_process(stats *result, const char *adress){
     GUI_close();
 }
 
+
+
+/**
+ * @brief The main of this file that should solve a game. 
+ *        Executing this code you will be asked if you want to solve using the BST or not and if you want to replay using SDL the winning solution.
+ * 
+ * @return Nothing. 
+ */
 
 int main(int argc, char *argv[]){
     //testing if the correct input has been given

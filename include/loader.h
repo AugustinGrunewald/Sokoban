@@ -1,3 +1,9 @@
+/**
+ * @file loader.h
+ * 
+ * @brief The include file for the loader.
+ */
+
 #ifndef LOADER_H
 #define LOADER_H
 

@@ -13,6 +13,21 @@
 #include "sokoban.h"
 #include "linked_list_map.h"
 
+
+/**
+ * @brief A function that should test all the functions related to the linked list (cons, delete, deallocate, nil, ...) given five maps.
+ * 
+ * @param adress_1 Adress number 1.
+ * 
+ * @param adress_2 Adress number 2.
+ * 
+ * @param adress_3 Adress number 3.
+ * 
+ * @param adress_4 Adress number 4.
+ * 
+ * @param adress_5 Adress number 5.
+ */
+
 void building_testing_linked_list(const char *adress_1, const char *adress_2, const char *adress_3, const char *adress_4, const char *adress_5){
     //loading the different maps
     game_map *loaded_map_1 = map_loader(adress_1);
@@ -106,6 +121,14 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     free(loaded_map_5->map);
     free(loaded_map_5);
 }
+
+
+
+/**
+ * @brief The main of this file that should test the linked list functions with some maps.
+ * 
+ * @return Nothing. 
+ */
 
 int main(void){
     printf("* Starting linked list tests...\n");

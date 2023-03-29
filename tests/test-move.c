@@ -13,6 +13,14 @@
 #include "sokoban.h"
 
 
+/**
+ * @brief A function to applied a movement to a map and test if the correct map is obtained. 
+ * 
+ * @param adress_original_file The map on which you apply the movement (character contained in the adress of the second map). 
+ * 
+ * @param adress_result_file The correct map that you should get after using the move function.
+ */
+
 void test_move(const char *adress_original_file, const char *adress_result_file){
     //loading the differents maps used for the test
     game_map *original_map = map_loader(adress_original_file);
@@ -36,6 +44,14 @@ void test_move(const char *adress_original_file, const char *adress_result_file)
     free(original_map->map);
     free(original_map);
 }
+
+
+
+/**
+ * @brief The main of this file that test the move function. It tests all the map mentionned in the Project pdf explanation.
+ * 
+ * @return Nothing. 
+ */
 
 int main(void){
     printf("* Starting moving tests ...\n");

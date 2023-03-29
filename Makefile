@@ -10,6 +10,7 @@ LDFLAGS = -lSDL2
 # rule to generate the doxygen documentation
 doc:
 	doxygen conf/doxygen.conf
+	firefox doc/html/index.html &
 
 # rule to remove all .o files and all executables
 clean:
@@ -75,7 +76,7 @@ compile-all-macOS: test-loader test-move test-replay \
 # \ allows to go to the next line
 ALL_TESTS = test-loader test-move test-replay test-linked-list-map test-queue-map test-solver test-bst-map
 
-ALL_TESTS_DEBUG = test-bst-map
+ALL_TESTS_DEBUG = test-solver
 
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done

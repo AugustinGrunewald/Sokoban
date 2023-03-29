@@ -17,6 +17,13 @@
 #include "loader.h"
 #include "sokoban.h"
 
+
+/**
+ * @brief The main of this file to play a game of sokoban using SDL.
+ * 
+ * @return Nothing 
+ */
+
 int main(int argc, char *argv[]) {
     //testing if the correct input has been given
     if (argc != 2) {

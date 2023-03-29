@@ -13,6 +13,12 @@
 #include "loader.h"
 #include "sokoban.h"
 
+
+/**
+ * @brief The main of this file that should replay a map, given the wanted plan an dthe number of movement you want to make.
+ * 
+ * @return nothing. 
+ */
 int main(int argc, char *argv[]){
     //testing if the correct input has been given
     if (argc != 4) {

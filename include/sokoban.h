@@ -1,3 +1,9 @@
+/**
+ * @file sokoban.h
+ * 
+ * @brief The include file for sokoban.
+ */
+
 #ifndef SOKOBAN_H
 #define SOKOBAN_H
 
@@ -19,10 +25,16 @@
 
 
 
-/** Defining the structures. */
+/** Renaming the game map structure. */
 typedef struct game_map game_map;
+
+/** Renaming the couple structure. */
 typedef struct couple couple;
+
+/** Renaming the double couple structure. */
 typedef struct double_couple double_couple;
+
+/** Renaming the move tool structure. */ 
 typedef struct move_tool move_tool;
 
 
