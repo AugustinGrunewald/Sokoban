@@ -58,8 +58,8 @@ replay: replay.o loader.o sokoban.o
 play: play.o loader.o sokoban.o gui.o 
 	$(CC) $(CFLAGS) -o play play.o loader.o sokoban.o gui.o $(LDFLAGS)
 
-solve: solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
-	$(CC) $(CFLAGS) -o solve solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o
+solve: solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o gui.o
+	$(CC) $(CFLAGS) -o solve solve.o loader.o sokoban.o linked_list_map.o queue_map.o solver.o bst_map.o gui.o $(LDFLAGS)
 
 
 # put all your applications and tests executables as prerequisite of this rule

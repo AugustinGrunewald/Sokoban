@@ -12,12 +12,100 @@
 #include <stdbool.h>
 #include <time.h>
 
+#include <SDL2/SDL.h>
+
+#include "gui.h"
 #include "solver.h"
 #include "queue_map.h"
 #include "linked_list_map.h"
 #include "sokoban.h"
 #include "loader.h"
 #include "bst_map.h"
+
+
+void replay_solving_process(stats *result, const char *adress){
+    //initializing the map and the main parameters associated
+    game_map *current_step_map = map_loader(adress);
+    game_map *next_step_map = (game_map *) malloc(sizeof(game_map));
+
+    int height = current_step_map->map_size.height;
+    int width = current_step_map->map_size.width;
+    char *level = current_step_map->map;
+
+    bool stop = false;
+
+
+    // initialize GUI window
+    GUI_init("Sokoban", width, height);
+
+    // display level and waiting 30ms
+    GUI_show(width, height, level);
+    GUI_pause(100);
+
+    int ind = 0;
+    //main loop
+    while (true){
+        //to get out the loop after the last movement
+        if (ind == result->plan_length){
+            stop = true;
+        }
+
+        switch (result->solution_plan[ind]){
+            case NORD:
+                next_step_map = move(current_step_map, NORD);
+                level = next_step_map->map;
+                GUI_show(width, height, level);
+                GUI_pause(100);
+                
+                *current_step_map = *next_step_map;
+                break;
+
+            case SOUTH:
+                next_step_map = move(current_step_map, SOUTH);
+                level = next_step_map->map;
+                GUI_show(width, height, level);
+                GUI_pause(100);
+                
+                *current_step_map = *next_step_map;
+                break;
+
+            case EAST:
+                next_step_map = move(current_step_map, EAST);
+                level = next_step_map->map;
+                GUI_show(width, height, level);
+                GUI_pause(100);
+                
+                *current_step_map = *next_step_map;
+                break;
+
+            case WEST:
+                next_step_map = move(current_step_map, WEST);
+                level = next_step_map->map;
+                GUI_show(width, height, level);
+                GUI_pause(100);
+                
+                *current_step_map = *next_step_map;
+                break;
+        }
+
+        // //instruction to quit the solving process if the user want to
+        // if (GUI_get_key() == 'q'){
+        //     stop = true;
+        // }
+
+        //incrementing the indice
+        ind++;
+        
+        //quiting the while loop
+        if (stop){
+            break;
+        }
+        
+        *current_step_map = *next_step_map;
+    }
+
+    GUI_close();
+}
 
 
 int main(int argc, char *argv[]){
@@ -32,22 +120,34 @@ int main(int argc, char *argv[]){
     game_map *loaded_map = map_loader(adress);
 
     //asking for bst or not
-    char user_answer[5];
+    char user_answer_1[5];
+    char user_answer_2[5];
     printf("\n");
     printf("Please let me know if you want to use the solver WITH or WITHOUT BST :\n");
     printf("\n");
     printf("Enter YES (if you want the BST solver) or NO (in the other case).\n");
-    scanf("%s", user_answer);
+    scanf("%s", user_answer_1);
     printf("\n");
+    printf("\n");
+    printf("Please let me know if you want to see a replay of the solving process :\n");
+    printf("\n");
+    printf("Enter YES or NO.\n");
+    scanf("%s", user_answer_2);
+    printf("\n");  
 
     //using the solver
     stats *result;
-    if (strcmp(user_answer, "YES") == 0){
+    if (strcmp(user_answer_1, "YES") == 0){
         printf("* Starting solving %s using the BST solver... \n", adress);
         result = solver_bst(loaded_map);
     }else{
         printf("* Starting solving %s using the classical solver... \n", adress);
         result = solver(loaded_map);
+    }
+
+    //showing the replay if necessary
+    if (strcmp(user_answer_2, "YES") == 0 && result->win == true){
+        replay_solving_process(result, adress);
     }
 
     if (result->win == true){
