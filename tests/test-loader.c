@@ -12,7 +12,7 @@
 #include "sokoban.h"
 
 void testing_loader(const char *adress) {
-    printf("  | testing the loader with %s ...  \n", adress);
+    printf("  | Testing the loader with %s ...  \n", adress);
 
     game_map *loaded_map = map_loader(adress);
     print_map(*loaded_map);

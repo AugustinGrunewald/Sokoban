@@ -72,18 +72,6 @@ bool is_empty_tree(bst_map tree);
 
 
 /**
- * @brief The map in the root of the binary search tree.
- *
- * @param tree  the tree
- *
- * @pre `tree` is not empty.
- *
- * @return the map in the root of the tree
- */
-game_map *value(bst_map tree);
-
-
-/**
  * @brief Gives true or false if the tree has the wanted map or not.
  *
  * @param tree   a pointer to the tree
@@ -110,18 +98,6 @@ bst_map insert_tree(bst_map tree, game_map *p_map);
 
 
 /**
- * @brief Traverse the tree depth-first and print the value
- *        in order (infix style).
- *
- * @param tree  the tree to be traversed
- *
- * @post After the call, the values in the nodes are printed
- *       in order.
- */
-void in_order_dfs_infix(bst_map tree);
-
-
-/**
  * @brief Deallocate a binary search tree.
  *
  * @param tree  the tree to be deallocated
@@ -130,15 +106,5 @@ void in_order_dfs_infix(bst_map tree);
  *       are deallocated
  */
 void deallocate_tree(bst_map tree);
-
-
-// /**
-//  * @brief Prints the tree.
-//  *
-//  * @param tree  the tree to be printed
-//  *
-//  * @post After the call, the tree is printed.
-//  */
-// void print_bst(bst_map tree);
 
 #endif

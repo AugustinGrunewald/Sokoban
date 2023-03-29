@@ -31,11 +31,24 @@ int main(int argc, char *argv[]){
     const char *adress = argv[1];
     game_map *loaded_map = map_loader(adress);
 
-    printf("* Starting solving %s ... \n", adress);
+    //asking for bst or not
+    char user_answer[5];
+    printf("\n");
+    printf("Please let me know if you want to use the solver WITH or WITHOUT BST :\n");
+    printf("\n");
+    printf("Enter YES (if you want the BST solver) or NO (in the other case).\n");
+    scanf("%s", user_answer);
+    printf("\n");
 
     //using the solver
     stats *result;
-    result = solver(loaded_map);
+    if (strcmp(user_answer, "YES") == 0){
+        printf("* Starting solving %s using the BST solver... \n", adress);
+        result = solver_bst(loaded_map);
+    }else{
+        printf("* Starting solving %s using the classical solver... \n", adress);
+        result = solver(loaded_map);
+    }
 
     if (result->win == true){
         printf("  |  WIN \n");

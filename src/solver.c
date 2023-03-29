@@ -299,7 +299,7 @@ bool searching_linked_list(game_map *p_map, linked_list_map list){
 
     while (index != NULL) {
         //first testing if the players are at the same position, this really increased the solving process 
-        if (index->p_map->player_pos.height == p_map->player_pos.height || index->p_map->player_pos.width == p_map->player_pos.width){
+        if (index->p_map->player_pos.height == p_map->player_pos.height && index->p_map->player_pos.width == p_map->player_pos.width){
             if (strncmp(index->p_map->map, p_map->map, p_map->map_size.height * p_map->map_size.width) == 0){
                 result = true;
                 return result;

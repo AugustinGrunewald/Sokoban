@@ -75,7 +75,7 @@ compile-all-macOS: test-loader test-move test-replay \
 # \ allows to go to the next line
 ALL_TESTS = test-loader test-move test-replay test-linked-list-map test-queue-map test-solver test-bst-map
 
-ALL_TESTS_DEBUG = test-solver
+ALL_TESTS_DEBUG = test-bst-map
 
 launch-tests: $(ALL_TESTS)
 	for x in $(ALL_TESTS); do ./$$x --all; done

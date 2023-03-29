@@ -18,10 +18,11 @@ void test_move(const char *adress_original_file, const char *adress_result_file)
     game_map *original_map = map_loader(adress_original_file);
     game_map *result_map = map_loader(adress_result_file);
 
+    //int to find the character giving the direction in the string adress and using the move funtcion to build the next map
     int direction_position = strlen(adress_result_file) - 4;
     game_map *result_map_with_move_function = move(original_map, adress_result_file[direction_position]);
 
-    printf("  | | testing the move with %s and the direction %c ... \n", adress_original_file, adress_result_file[direction_position]);
+    printf("  | | Testing the move with %s and the direction %c ... \n", adress_original_file, adress_result_file[direction_position]);
 
     bool test_result = comparaison_two_maps(*result_map, *result_map_with_move_function);
     assert(test_result == true);

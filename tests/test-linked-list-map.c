@@ -32,7 +32,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     printf("  |  Creating a list of five maps ... \n");
     list = cons(loaded_map_1, cons(loaded_map_2, cons(loaded_map_3, cons(loaded_map_4, cons(loaded_map_5, nil())))));
 
-    //checking if the element at the right place are
+    //checking if the element are at the right place 
     printf("  |  Checking if the different maps are at the right place ... \n");
     bool test_result_1 = comparaison_two_maps(*loaded_map_1, *get_element(list, 0));
     assert(test_result_1 == true);
@@ -59,6 +59,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     //Checking if the remove and insert function works
     printf("  |  Checking the remove and insert function on the defined list ... \n");
     
+    //Removing and adding map 1
     linked_list_map list_1 = remove_element(list, 0);
     bool test_result_remove_1 = comparaison_two_maps(*loaded_map_2, *get_element(list_1, 0));
     assert(test_result_remove_1 == true);
@@ -69,6 +70,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     free(list_1);
     printf("  | |  Insert map 1 ... Success \n");
 
+    //Removing and adding map 3
     linked_list_map list_2 = remove_element(list, 2);
     bool test_result_remove_2 = comparaison_two_maps(*loaded_map_4, *get_element(list_2, 2));
     assert(test_result_remove_2 == true);    
@@ -78,6 +80,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
     assert(test_result_insert_2 == true);
     printf("  | |  Insert map 3 ... Success \n");
 
+    //Removing and adding map 5
     linked_list_map list_3 = remove_element(list, 4);
     bool test_result_remove_3 = comparaison_two_maps(*loaded_map_4, *get_element(list_3, 3));
     assert(test_result_remove_3 == true);
@@ -107,7 +110,7 @@ void building_testing_linked_list(const char *adress_1, const char *adress_2, co
 int main(void){
     printf("* Starting linked list tests...\n");
 
-    // testing the linked list on several points
+    // testing the linked list on several points with different maps
     building_testing_linked_list("./data/soko_dumb_1.in", "./data/soko_dumb_2.in", "./data/soko_dumb_3.in", "./data/soko_dumb.in", "./data/soko_dumber.in");
 
     printf("  +-> OK!\n");
