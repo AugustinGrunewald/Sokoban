@@ -1,0 +1,14 @@
+# === Ignore objects (can be easily build with the Makefile) ===
+*.o
+
+# Exception for the Makefile and the ReadMe
+!Makefile
+
+# === VS Code configuration directory ===
+.vscode/
+
+# === authors.txt used for migration from svn to git ===
+authors.txt
+
+# === Other ===
+./DS_Store
