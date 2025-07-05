@@ -39,6 +39,7 @@ in a corner. In this case all the map explored from this one were useless. This 
 ---
 
 # EXECUTING EXPLANATION:
+To compile all files into executables, use the Makefile command : *make compile-all*.
 Reminder : everything is already detailled in the head of the concerned functions.
 I give some example of uses.
 
